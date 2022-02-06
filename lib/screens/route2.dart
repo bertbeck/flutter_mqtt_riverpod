@@ -38,14 +38,37 @@ class Route2Page extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             wifiList.when(
-                data: (List<String> data) => Text('$data'),
+                data: (List<String> data) => SelectWiFi(data: data),
                 error: (Object error, StackTrace? stackTrace) =>
                     Text('$error $stackTrace'),
                 loading: () => const CircularProgressIndicator()),
-            Text(
-              'Pi says $wifiList',
-              textAlign: TextAlign.center,
-            ),
+            // Text(
+            //   'Pi says $wifiList',
+            //   textAlign: TextAlign.center,
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SelectWiFi extends HookConsumerWidget {
+  final List<String> data;
+  const SelectWiFi({
+    required this.data,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('$data'),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(
