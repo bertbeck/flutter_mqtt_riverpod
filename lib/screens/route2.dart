@@ -37,6 +37,11 @@ class Route2Page extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            wifiList.when(
+                data: (List<String> data) => Text('$data'),
+                error: (Object error, StackTrace? stackTrace) =>
+                    Text('$error $stackTrace'),
+                loading: () => const CircularProgressIndicator()),
             Text(
               'Pi says $wifiList',
               textAlign: TextAlign.center,
