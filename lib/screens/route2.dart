@@ -7,6 +7,10 @@ final wifiListProvider = FutureProvider((ref) async {
   return Future.delayed(const Duration(seconds: 5), () => ['wifi1', 'wifi2']);
 });
 
+// shared state
+final selectedWifiProvider = StateProvider((ref) => '');
+final wifiPasswordProvider = StateProvider((ref) => '');
+
 class Route2 extends HookConsumerWidget {
   const Route2({
     Key? key,
@@ -63,9 +67,10 @@ class SelectWiFi extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selected = useState<String?>(data.first);
     final passwordController = useTextEditingController(text: '');
     final _isObscure = useState(true);
+    final selectedWifi = ref.watch(selectedWifiProvider.notifier);
+
     final items = [
       for (final item in data) DropdownMenuItem(value: item, child: Text(item))
     ];
@@ -75,12 +80,12 @@ class SelectWiFi extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('$data'),
-            DropdownButton(
-              value: selected.value,
+            // Text('$data'),
+            DropdownButton<String>(
+              value: data.first,
               items: items,
               onChanged: (String? value) {
-                selected.value = value;
+                selectedWifi.state = value ?? '';
               },
             ),
             TextField(
@@ -98,7 +103,7 @@ class SelectWiFi extends HookConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 debugPrint(
-                    'CONNECTING: ${selected.value} ${passwordController.text}');
+                    'CONNECTING: ${selectedWifi.state} ${passwordController.text}');
                 Navigator.pop(
                   context,
                 );
