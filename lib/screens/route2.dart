@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final piProvider = Provider((ref) => 3.14);
@@ -62,6 +63,10 @@ class SelectWiFi extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selected = useState<String?>(data.first);
+    final items = [
+      for (final item in data) DropdownMenuItem(value: item, child: Text(item))
+    ];
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -69,6 +74,13 @@ class SelectWiFi extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('$data'),
+            DropdownButton(
+              value: selected.value,
+              items: items,
+              onChanged: (String? value) {
+                selected.value = value;
+              },
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(
