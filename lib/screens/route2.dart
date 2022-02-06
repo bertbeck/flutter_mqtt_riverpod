@@ -64,6 +64,8 @@ class SelectWiFi extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selected = useState<String?>(data.first);
+    final passwordController = useTextEditingController(text: '');
+    final _isObscure = useState(true);
     final items = [
       for (final item in data) DropdownMenuItem(value: item, child: Text(item))
     ];
@@ -81,13 +83,27 @@ class SelectWiFi extends HookConsumerWidget {
                 selected.value = value;
               },
             ),
+            TextField(
+                controller: passwordController,
+                obscureText: _isObscure.value,
+                decoration: InputDecoration(
+                    labelText: 'WiFi Password',
+                    suffixIcon: IconButton(
+                        icon: Icon(_isObscure.value
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          _isObscure.value = !_isObscure.value;
+                        }))),
             ElevatedButton(
               onPressed: () {
+                debugPrint(
+                    'CONNECTING: ${selected.value} ${passwordController.text}');
                 Navigator.pop(
                   context,
                 );
               },
-              child: const Text('Done!'),
+              child: const Text('Set WiFi!'),
             ),
           ],
         ),
