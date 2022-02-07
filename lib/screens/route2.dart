@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../mqtt/pi_mqtt.dart';
 import 'route3.dart';
 
 final piProvider = Provider((ref) => 3.14);
 final wifiListProvider = FutureProvider((ref) async {
+  // ignore: unused_local_variable
+  final piMqttManager = await ref.watch(piMqttManagerProvider.future);
+
   return Future.delayed(const Duration(seconds: 5), () => ['wifi1', 'wifi2']);
 });
 
