@@ -2,19 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'route3.dart';
+import 'route2.dart';
 
-final piProvider = Provider((ref) => 3.14);
-final wifiListProvider = FutureProvider((ref) async {
-  return Future.delayed(const Duration(seconds: 5), () => ['wifi1', 'wifi2']);
-});
-
-// shared state
-final selectedWifiProvider = StateProvider((ref) => '');
-final wifiPasswordProvider = StateProvider((ref) => '');
-
-class Route2 extends HookConsumerWidget {
-  const Route2({
+class Route3 extends HookConsumerWidget {
+  const Route3({
     Key? key,
   }) : super(key: key);
 
@@ -22,33 +13,30 @@ class Route2 extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Route 2'),
+        title: const Text('Route 3'),
       ),
-      body: const SafeArea(child: Route2Page()),
+      body: const SafeArea(child: Route3Page()),
       // floatingActionButton: MyFAB(),
     );
   }
 }
 
-class Route2Page extends HookConsumerWidget {
-  const Route2Page({
+class Route3Page extends HookConsumerWidget {
+  const Route3Page({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final wifiList = ref.watch(wifiListProvider);
+    final selectedWifi = ref.watch(selectedWifiProvider);
+    final password = ref.watch(wifiPasswordProvider);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            wifiList.when(
-                data: (List<String> data) => SelectWiFi(data: data),
-                error: (Object error, StackTrace? stackTrace) =>
-                    Text('$error $stackTrace'),
-                loading: () => const CircularProgressIndicator()),
+            Text('trying to send wifi: $selectedWifi password $password'),
             // Text(
             //   'Pi says $wifiList',
             //   textAlign: TextAlign.center,
@@ -72,7 +60,6 @@ class SelectWiFi extends HookConsumerWidget {
     final passwordController = useTextEditingController(text: '');
     final _isObscure = useState(true);
     final selectedWifi = ref.watch(selectedWifiProvider.notifier);
-    final password = ref.watch(wifiPasswordProvider.notifier);
 
     final items = [
       for (final item in data) DropdownMenuItem(value: item, child: Text(item))
@@ -105,11 +92,11 @@ class SelectWiFi extends HookConsumerWidget {
                         }))),
             ElevatedButton(
               onPressed: () {
-                password.state = passwordController.text;
                 debugPrint(
                     'CONNECTING: ${selectedWifi.state} ${passwordController.text}');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Route3()));
+                Navigator.pop(
+                  context,
+                );
               },
               child: const Text('Set WiFi!'),
             ),
