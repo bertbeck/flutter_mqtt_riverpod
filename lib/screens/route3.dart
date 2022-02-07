@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_mqtt_riverpod/api/http_api.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'route2.dart';
 
-final sendWifiProvider = FutureProvider<bool>((_) {
+final sendWifiProvider = FutureProvider<bool>((ref) async {
+  final data = await ref.watch(apiSendWifiProvider.future);
+  debugPrint('apiSendWifiProvider: $data');
   return Future.delayed(const Duration(seconds: 5), () => true);
 });
 
