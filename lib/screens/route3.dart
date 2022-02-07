@@ -4,6 +4,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'route2.dart';
 
+final sendWifiProvider = FutureProvider<bool>((_) {
+  return Future.delayed(const Duration(seconds: 5), () => true);
+});
+
 class Route3 extends HookConsumerWidget {
   const Route3({
     Key? key,
@@ -30,13 +34,29 @@ class Route3Page extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedWifi = ref.watch(selectedWifiProvider);
     final password = ref.watch(wifiPasswordProvider);
+    final sendWifi = ref.watch(sendWifiProvider);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('trying to send wifi: $selectedWifi password $password'),
+            Text(
+              'Selected Wifi: $selectedWifi\nPassword: $password',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            sendWifi.when(
+              loading: () {
+                return const CircularProgressIndicator();
+              },
+              data: (bool data) {
+                return Text('Success: $data');
+              },
+              error: (Object error, StackTrace? stackTrace) {
+                return Text('Error: $error');
+              },
+            ),
+
             // Text(
             //   'Pi says $wifiList',
             //   textAlign: TextAlign.center,
