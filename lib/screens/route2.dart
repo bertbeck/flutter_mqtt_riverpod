@@ -9,7 +9,7 @@ final piProvider = Provider((ref) => 3.14);
 final wifiListProvider = FutureProvider((ref) async {
   // ignore: unused_local_variable
   final piMqttManager = await ref.watch(piMqttManagerProvider.future);
-
+  piMqttManager.publish('test');
   return Future.delayed(const Duration(seconds: 5), () => ['wifi1', 'wifi2']);
 });
 

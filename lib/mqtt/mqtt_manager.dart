@@ -101,4 +101,9 @@ class MQTTManager {
     debugPrint(
         'EXAMPLE::OnConnected client callback - Client connection was sucessful');
   }
+
+  @override
+  String toString() {
+    return 'MQTTManager(_client: $_client, _identifier: $_identifier, _host: $_host, _topic: $_topic)';
+  }
 }
