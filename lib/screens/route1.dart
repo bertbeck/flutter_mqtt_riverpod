@@ -15,7 +15,6 @@ class Route1 extends HookConsumerWidget {
         title: const Text('Route 1'),
       ),
       body: const SafeArea(child: Route1Page()),
-      // floatingActionButton: MyFAB(),
     );
   }
 }

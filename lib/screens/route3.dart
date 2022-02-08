@@ -8,7 +8,7 @@ import 'route2.dart';
 final sendWifiProvider = FutureProvider<bool>((ref) async {
   final data = await ref.watch(apiSendWifiProvider.future);
   debugPrint('apiSendWifiProvider: $data');
-  return Future.delayed(const Duration(seconds: 5), () => true);
+  return true; // TODO extract proper value from response
 });
 
 class Route3 extends HookConsumerWidget {
@@ -23,7 +23,6 @@ class Route3 extends HookConsumerWidget {
         title: const Text('Route 3'),
       ),
       body: const SafeArea(child: Route3Page()),
-      // floatingActionButton: MyFAB(),
     );
   }
 }
@@ -45,7 +44,7 @@ class Route3Page extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Selected Wifi: $selectedWifi\nPassword: $password',
+              'Selected Wifi: "$selectedWifi"\nPassword: "$password"',
               style: Theme.of(context).textTheme.headline6,
             ),
             sendWifi.when(
@@ -59,11 +58,6 @@ class Route3Page extends HookConsumerWidget {
                 return Text('Error: $error');
               },
             ),
-
-            // Text(
-            //   'Pi says $wifiList',
-            //   textAlign: TextAlign.center,
-            // ),
           ],
         ),
       ),
@@ -82,7 +76,7 @@ class SelectWiFi extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final passwordController = useTextEditingController(text: '');
     final _isObscure = useState(true);
-    final selectedWifi = ref.watch(selectedWifiProvider.notifier);
+    final selectedWifiState = ref.watch(selectedWifiProvider.state);
 
     final items = [
       for (final item in data) DropdownMenuItem(value: item, child: Text(item))
@@ -93,30 +87,31 @@ class SelectWiFi extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Text('$data'),
             DropdownButton<String>(
               value: data.first,
               items: items,
               onChanged: (String? value) {
-                selectedWifi.state = value ?? '';
+                selectedWifiState.state = value ?? '';
               },
             ),
             TextField(
-                controller: passwordController,
-                obscureText: _isObscure.value,
-                decoration: InputDecoration(
-                    labelText: 'WiFi Password',
-                    suffixIcon: IconButton(
-                        icon: Icon(_isObscure.value
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                        onPressed: () {
-                          _isObscure.value = !_isObscure.value;
-                        }))),
+              controller: passwordController,
+              obscureText: _isObscure.value,
+              decoration: InputDecoration(
+                labelText: 'WiFi Password',
+                suffixIcon: IconButton(
+                    icon: Icon(_isObscure.value
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      _isObscure.value = !_isObscure.value;
+                    }),
+              ),
+            ),
             ElevatedButton(
               onPressed: () {
                 debugPrint(
-                    'CONNECTING: ${selectedWifi.state} ${passwordController.text}');
+                    'CONNECTING: ${selectedWifiState.state} ${passwordController.text}');
                 Navigator.pop(
                   context,
                 );
