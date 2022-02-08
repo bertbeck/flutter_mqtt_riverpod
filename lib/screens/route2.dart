@@ -9,7 +9,7 @@ final piProvider = Provider((ref) => 3.14);
 final wifiListProvider = FutureProvider((ref) async {
   final data = await ref.watch(apiWifiListProvider.future);
   debugPrint('wifiListProvider: $data');
-  return Future.delayed(const Duration(seconds: 5), () => ['wifi1', 'wifi2']);
+  return data;
 });
 
 // shared state
@@ -73,9 +73,10 @@ class SelectWiFi extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final passwordController = useTextEditingController(text: '');
-    final _isObscure = useState(true);
-    final selectedWifi = ref.watch(selectedWifiProvider.notifier);
-    final password = ref.watch(wifiPasswordProvider.notifier);
+    final isObscuraState = useState(true);
+    final dropdownState = useState(data.first);
+    final selectedWifiState = ref.watch(selectedWifiProvider.state);
+    final passwordState = ref.watch(wifiPasswordProvider.state);
 
     final items = [
       for (final item in data) DropdownMenuItem(value: item, child: Text(item))
@@ -88,29 +89,32 @@ class SelectWiFi extends HookConsumerWidget {
           children: [
             // Text('$data'),
             DropdownButton<String>(
-              value: data.first,
+              value: dropdownState.value,
               items: items,
               onChanged: (String? value) {
-                selectedWifi.state = value ?? '';
+                debugPrint(' new wifi is: $value');
+                dropdownState.value = value ?? '';
+                debugPrint(' updated wifi is: ${dropdownState.value}');
               },
             ),
             TextField(
                 controller: passwordController,
-                obscureText: _isObscure.value,
+                obscureText: isObscuraState.value,
                 decoration: InputDecoration(
                     labelText: 'WiFi Password',
                     suffixIcon: IconButton(
-                        icon: Icon(_isObscure.value
+                        icon: Icon(isObscuraState.value
                             ? Icons.visibility
                             : Icons.visibility_off),
                         onPressed: () {
-                          _isObscure.value = !_isObscure.value;
+                          isObscuraState.value = !isObscuraState.value;
                         }))),
             ElevatedButton(
               onPressed: () {
-                password.state = passwordController.text;
+                selectedWifiState.state = dropdownState.value;
+                passwordState.state = passwordController.text;
                 debugPrint(
-                    'CONNECTING: ${selectedWifi.state} ${passwordController.text}');
+                    'CONNECTING: ${selectedWifiState.state} ${passwordController.text}');
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const Route3()));
               },

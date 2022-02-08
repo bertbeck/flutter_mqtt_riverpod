@@ -1,24 +1,37 @@
 import 'dart:convert';
 
+import 'package:flutter_mqtt_riverpod/screens/route2.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
+
+final endpoint = Uri.parse('http://10.0.0.20:5000/wifi');
+final endpoint2 = Uri.parse('http://10.0.0.20:5000/set_wifi');
 
 final uri1 = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
 final uri2 = uri1.replace(path: 'todos/2');
 final httpClientProvider = Provider((_) => Client());
 
-final apiWifiListProvider = FutureProvider((ref) async {
+final apiWifiListProvider = FutureProvider<List<String>>((ref) async {
   final client = ref.watch(httpClientProvider);
   final response =
-      await client.get(uri1, headers: {'Accept': 'application/json'});
-  final decoded = jsonDecode(response.body);
-  return decoded;
+      await client.get(endpoint, headers: {'Accept': 'application/json'});
+  final List decoded = jsonDecode(response.body);
+  final wifiList = decoded
+      .map<String>((wifi) => wifi.toString())
+      .where((e) => e.length < 30 && e.isNotEmpty)
+      .toList();
+
+  return wifiList;
 });
 
 final apiSendWifiProvider = FutureProvider((ref) async {
   final client = ref.watch(httpClientProvider);
+  final selectedWifi = ref.watch(selectedWifiProvider);
+  final password = ref.watch(wifiPasswordProvider);
+  final endwithargs = endpoint2
+      .replace(queryParameters: {'ssid': selectedWifi, 'password': password});
   final response =
-      await client.get(uri2, headers: {'Accept': 'application/json'});
+      await client.get(endwithargs, headers: {'Accept': 'application/json'});
   final decoded = jsonDecode(response.body);
   return decoded;
 });
