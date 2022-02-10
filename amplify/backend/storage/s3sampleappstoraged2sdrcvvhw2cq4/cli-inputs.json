@@ -1,0 +1,10 @@
+{
+  "resourceName": "s3sampleappstoraged2sdrcvvhw2cq4",
+  "bucketName": "sampleappstoraged2sdrcvvhw2cq4",
+  "policyUUID": "b2ff984c",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "READ"
+  ]
+}
