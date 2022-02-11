@@ -5,6 +5,8 @@ import 'package:aws_iot_data_api/iot-data-2015-05-28.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+const String _awsIotEndpoint = 'a2fa43d73ede4i-ats.iot.us-west-2.amazonaws.com';
+
 final authSessionProvider =
     FutureProvider((ref) async => await Amplify.Auth.fetchAuthSession(
           options: CognitoSessionOptions(getAWSCredentials: true),
@@ -15,7 +17,7 @@ final iotProvider = FutureProvider((ref) async {
   final iot = IoT(
     region: 'us-west-2',
     credentials: clientCredentials,
-    endpointUrl: 'https://iot.us-west-2.amazonaws.com',
+    endpointUrl: _awsIotEndpoint,
   );
   debugPrint('iot: $iot');
   return iot;
@@ -26,7 +28,7 @@ final iotDataPlaneProvider = FutureProvider((ref) async {
   final iotDataPlane = IoTDataPlane(
     region: 'us-west-2',
     credentials: clientCredentials,
-    endpointUrl: 'https://iot.us-west-2.amazonaws.com',
+    endpointUrl: _awsIotEndpoint,
   );
   debugPrint('iot: $iotDataPlane');
   return iotDataPlane;
@@ -48,3 +50,10 @@ final credentialsProvider = FutureProvider(
     return clientCredentials;
   },
 );
+
+final getThingShadowProvider = FutureProvider((ref) async {
+  final iotDataPlane = await ref.watch(iotDataPlaneProvider.future);
+  final getThingShadow = iotDataPlane.getThingShadow(thingName: 'RandalPi');
+  debugPrint('getThingShadow: $getThingShadow');
+  return getThingShadow;
+});
