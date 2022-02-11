@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../api/iot.dart';
 import 'route2.dart';
 
 class Route1 extends HookConsumerWidget {
@@ -26,12 +27,17 @@ class Route1Page extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final iot = ref.watch(iotProvider);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              '$iot',
+              // style: Theme.of(context).textTheme.headline6,
+            ),
             const Text(
               '''
 Before attemping to connect to your pi, please ensure you have done the following:
