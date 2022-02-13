@@ -5,7 +5,9 @@ import 'package:aws_iot_data_api/iot-data-2015-05-28.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-const String _awsIotEndpoint = 'a2fa43d73ede4i-ats.iot.us-west-2.amazonaws.com';
+const String _awsIotEndpoint = 'https://iot.us-west-2.amazonaws.com';
+const String _awsDataPlaneEndpoint =
+    "https://a2fa43d73ede4i-ats.iot.us-west-2.amazonaws.com";
 
 final authSessionProvider =
     FutureProvider((ref) async => await Amplify.Auth.fetchAuthSession(
@@ -23,12 +25,32 @@ final iotProvider = FutureProvider((ref) async {
   return iot;
 });
 
+final describeEndpointProvider = FutureProvider((ref) async {
+  final iot = await ref.read(iotProvider.future);
+  final describeEndpoint = await iot.describeEndpoint(
+    endpointType: 'iot:CredentialProvider',
+  );
+
+  debugPrint('describeEndpoint: $describeEndpoint');
+  return describeEndpoint;
+});
+
+final getPolicyProvider = FutureProvider((ref) async {
+  final iot = await ref.watch(iotProvider.future);
+  final getPolicy = await iot.getPolicy(
+    policyName: 'endOurTears',
+  );
+
+  debugPrint('getPolicy: $getPolicy');
+  return getPolicy;
+});
+
 final iotDataPlaneProvider = FutureProvider((ref) async {
   final clientCredentials = await ref.watch(credentialsProvider.future);
   final iotDataPlane = IoTDataPlane(
     region: 'us-west-2',
     credentials: clientCredentials,
-    endpointUrl: _awsIotEndpoint,
+    endpointUrl: _awsDataPlaneEndpoint,
   );
   debugPrint('iot: $iotDataPlane');
   return iotDataPlane;
@@ -53,7 +75,19 @@ final credentialsProvider = FutureProvider(
 
 final getThingShadowProvider = FutureProvider((ref) async {
   final iotDataPlane = await ref.watch(iotDataPlaneProvider.future);
-  final getThingShadow = iotDataPlane.getThingShadow(thingName: 'RandalPi');
+  final getThingShadow = await iotDataPlane.getThingShadow(
+    thingName: 'RandalPi',
+    shadowName: 'test1',
+  );
   debugPrint('getThingShadow: $getThingShadow');
-  return getThingShadow;
+  String s = String.fromCharCodes(getThingShadow.payload ?? []);
+  return s;
+});
+
+final getShadowListProvider = FutureProvider((ref) async {
+  final iotDataPlane = await ref.watch(iotDataPlaneProvider.future);
+  final getShadowList =
+      await iotDataPlane.listNamedShadowsForThing(thingName: '1');
+  debugPrint('getShadowList: $getShadowList');
+  return getShadowList;
 });
