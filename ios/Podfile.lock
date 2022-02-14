@@ -47,12 +47,15 @@ PODS:
   - ObjectMapper (4.2.0)
   - SwiftFormat/CLI (0.49.4)
   - SwiftLint (0.46.2)
+  - wifi_iot (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/ios`)
   - amplify_core (from `.symlinks/plugins/amplify_core/ios`)
   - amplify_flutter (from `.symlinks/plugins/amplify_flutter/ios`)
   - Flutter (from `Flutter`)
+  - wifi_iot (from `.symlinks/plugins/wifi_iot/ios`)
 
 SPEC REPOS:
   trunk:
@@ -77,6 +80,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/amplify_flutter/ios"
   Flutter:
     :path: Flutter
+  wifi_iot:
+    :path: ".symlinks/plugins/wifi_iot/ios"
 
 SPEC CHECKSUMS:
   Amplify: 7906ce8bc77c2c9a97545581024eb90ec6f2e03a
@@ -94,6 +99,7 @@ SPEC CHECKSUMS:
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   SwiftFormat: 8acc16efcecb563206cbe90b4cb047cfdf9aafdb
   SwiftLint: 6bc52a21f0fd44cab9aa2dc8e534fb9f5e3ec507
+  wifi_iot: b5aafd6f9b52f8a357383a1deabab45f31cd602d
 
 PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 

@@ -4,6 +4,7 @@ import 'package:aws_iot_api/iot-2015-05-28.dart';
 import 'package:aws_iot_data_api/iot-data-2015-05-28.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:wifi_iot/wifi_iot.dart';
 
 const String _awsIotEndpoint = 'https://iot.us-west-2.amazonaws.com';
 const String _awsDataPlaneEndpoint =
@@ -90,4 +91,10 @@ final getShadowListProvider = FutureProvider((ref) async {
       await iotDataPlane.listNamedShadowsForThing(thingName: '1');
   debugPrint('getShadowList: $getShadowList');
   return getShadowList;
+});
+
+final getSsidProvider = FutureProvider((ref) async {
+  final ssid = await WiFiForIoTPlugin.getSSID();
+  debugPrint('ssid: $ssid');
+  return ssid;
 });

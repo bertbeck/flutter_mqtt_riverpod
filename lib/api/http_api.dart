@@ -4,8 +4,11 @@ import 'package:flutter_mqtt_riverpod/screens/route2.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 
-final endpoint = Uri.parse('http://10.0.0.5:5000/wifi/scan');
-final endpoint2 = Uri.parse('http://10.0.0.5:5000/wifi/set');
+final endpoint = Uri.parse('http://10.42.0.1:5000/wifi/scan');
+final endpoint2 = Uri.parse('http://10.42.0.1:5000/wifi/set');
+
+// final endpoint = Uri.parse('http://10.0.0.20:5000/wifi/scan');
+// final endpoint2 = Uri.parse('http://10.0.0.20:5000/wifi/set');
 
 final uri1 = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
 final uri2 = uri1.replace(path: 'todos/2');

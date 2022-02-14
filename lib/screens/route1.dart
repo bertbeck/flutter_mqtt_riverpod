@@ -28,10 +28,11 @@ class Route1Page extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final iotDataPlane = ref.watch(iotDataPlaneProvider);
-    final getThingShadow = ref.watch(getThingShadowProvider);
+    // final getThingShadow = ref.watch(getThingShadowProvider);
     // final getShadowList = ref.watch(getShadowListProvider);
     // final describeEndpoint = ref.watch(describeEndpointProvider);
     // final policy = ref.watch(getPolicyProvider);
+    final getSsid = ref.watch(getSsidProvider);
 
     return Center(
       child: Padding(
@@ -40,7 +41,7 @@ class Route1Page extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '$getThingShadow',
+              '$getSsid',
               // style: Theme.of(context).textTheme.headline6,
             ),
             const Text(
