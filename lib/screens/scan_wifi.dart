@@ -25,16 +25,16 @@ class ScanWifi extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Route 2'),
+        title: const Text('Scan Wifi'),
       ),
-      body: const SafeArea(child: Route2Page()),
+      body: const SafeArea(child: ScanWifiScreen()),
       // floatingActionButton: MyFAB(),
     );
   }
 }
 
-class Route2Page extends HookConsumerWidget {
-  const Route2Page({
+class ScanWifiScreen extends HookConsumerWidget {
+  const ScanWifiScreen({
     Key? key,
   }) : super(key: key);
 
@@ -115,7 +115,7 @@ class SelectWiFi extends HookConsumerWidget {
                 passwordState.state = passwordController.text;
                 debugPrint(
                     'CONNECTING: ${selectedWifiState.state} ${passwordController.text}');
-                context.go('/route3');
+                context.goNamed('add wifi');
               },
               child: const Text('Set WiFi!'),
             ),

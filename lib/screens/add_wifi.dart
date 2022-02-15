@@ -20,7 +20,7 @@ class AddWifi extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Route 3'),
+        title: const Text('Add Wifi'),
       ),
       body: const SafeArea(child: AddWifiScreen()),
     );

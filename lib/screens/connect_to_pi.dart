@@ -13,7 +13,7 @@ class ConnectToPi extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Route 1'),
+        title: const Text('Connect to Pi'),
       ),
       body: const SafeArea(child: ConnectToPiScreen()),
     );
@@ -55,7 +55,7 @@ Before attemping to connect to your pi, please ensure you have done the followin
             ),
             ElevatedButton(
               onPressed: () {
-                context.go('/route2');
+                context.goNamed('scan wifi');
               },
               child: const Text('Connect!'),
             ),
