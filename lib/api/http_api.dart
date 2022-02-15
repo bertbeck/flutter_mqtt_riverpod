@@ -1,8 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter_mqtt_riverpod/screens/route2.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
+
+import '../screens/scan_wifi.dart';
 
 final endpoint = Uri.parse('http://10.42.0.1:5000/wifi/scan');
 final endpoint2 = Uri.parse('http://10.42.0.1:5000/wifi/set');

@@ -16,8 +16,8 @@ final wifiListProvider = FutureProvider((ref) async {
 final selectedWifiProvider = StateProvider((ref) => '');
 final wifiPasswordProvider = StateProvider((ref) => '');
 
-class Route2 extends HookConsumerWidget {
-  const Route2({
+class ScanWifi extends HookConsumerWidget {
+  const ScanWifi({
     Key? key,
   }) : super(key: key);
 

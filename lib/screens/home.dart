@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mqtt_riverpod/screens/route2.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'route1.dart';
-import 'route2.dart';
-import 'route3.dart';
+import 'connect_to_pi.dart';
+import 'add_wifi.dart';
+import 'scan_wifi.dart';
 
 final _router = GoRouter(
   debugLogDiagnostics: true,
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const Route1(),
+      name: 'connect to pi',
+      builder: (context, state) => const ConnectToPi(),
     ),
     GoRoute(
       path: '/route2',
-      builder: (context, state) => const Route2(),
+      name: 'scan wifi',
+      builder: (context, state) => const ScanWifi(),
     ),
     GoRoute(
+      name: 'add wifi',
       path: '/route3',
-      builder: (context, state) => const Route3(),
+      builder: (context, state) => const AddWifi(),
     ),
   ],
 );

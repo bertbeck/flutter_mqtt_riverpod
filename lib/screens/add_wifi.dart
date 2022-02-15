@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../api/http_api.dart';
-import 'route2.dart';
+import 'scan_wifi.dart';
 
 final sendWifiProvider = FutureProvider<bool>((ref) async {
   final data = await ref.watch(apiSendWifiProvider.future);
@@ -11,8 +11,8 @@ final sendWifiProvider = FutureProvider<bool>((ref) async {
   return data; // TODO extract proper value from response
 });
 
-class Route3 extends HookConsumerWidget {
-  const Route3({
+class AddWifi extends HookConsumerWidget {
+  const AddWifi({
     Key? key,
   }) : super(key: key);
 
@@ -22,13 +22,13 @@ class Route3 extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text('Route 3'),
       ),
-      body: const SafeArea(child: Route3Page()),
+      body: const SafeArea(child: AddWifiScreen()),
     );
   }
 }
 
-class Route3Page extends HookConsumerWidget {
-  const Route3Page({
+class AddWifiScreen extends HookConsumerWidget {
+  const AddWifiScreen({
     Key? key,
   }) : super(key: key);
 

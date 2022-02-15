@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../api/iot.dart';
 
-class Route1 extends HookConsumerWidget {
-  const Route1({
+class ConnectToPi extends HookConsumerWidget {
+  const ConnectToPi({
     Key? key,
   }) : super(key: key);
 
@@ -15,13 +15,13 @@ class Route1 extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text('Route 1'),
       ),
-      body: const SafeArea(child: Route1Page()),
+      body: const SafeArea(child: ConnectToPiScreen()),
     );
   }
 }
 
-class Route1Page extends HookConsumerWidget {
-  const Route1Page({
+class ConnectToPiScreen extends HookConsumerWidget {
+  const ConnectToPiScreen({
     Key? key,
   }) : super(key: key);
 
