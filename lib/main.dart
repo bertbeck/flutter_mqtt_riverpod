@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'amplifyconfiguration.dart';
+import 'api/http_api.dart';
 import 'screens/auth.dart';
 
 Future<void> main() async {
@@ -15,8 +16,18 @@ Future<void> main() async {
     throw Exception('Could not configure Amplify: $e');
   }
   runApp(
-    const ProviderScope(
-      child: Auth(),
+    ProviderScope(
+      overrides: [
+        apiWifiListProvider.overrideWithValue(
+          const AsyncValue.data(
+            ['a', 'b', 'c'],
+          ),
+        ),
+        apiSendWifiProvider.overrideWithValue(
+          const AsyncValue.data(true),
+        )
+      ],
+      child: const Auth(),
     ),
   );
 }

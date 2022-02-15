@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../api/iot.dart';
-import 'route2.dart';
 
 class Route1 extends HookConsumerWidget {
   const Route1({
@@ -55,10 +55,7 @@ Before attemping to connect to your pi, please ensure you have done the followin
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Route2()),
-                );
+                context.go('/route2');
               },
               child: const Text('Connect!'),
             ),
