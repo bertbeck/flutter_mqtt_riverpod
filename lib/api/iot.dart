@@ -78,7 +78,7 @@ final getThingShadowProvider = FutureProvider((ref) async {
   final iotDataPlane = await ref.watch(iotDataPlaneProvider.future);
   final getThingShadow = await iotDataPlane.getThingShadow(
     thingName: 'RandalPi',
-    shadowName: 'test1',
+    shadowName: 'ip',
   );
   debugPrint('getThingShadow: $getThingShadow');
   String s = String.fromCharCodes(getThingShadow.payload ?? []);
