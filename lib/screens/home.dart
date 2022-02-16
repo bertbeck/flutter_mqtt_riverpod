@@ -37,6 +37,9 @@ class Home extends HookConsumerWidget {
     return MaterialApp.router(
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
+      theme: ThemeData.from(
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: const Color(0xFF5DB075))),
     );
   }
 }
