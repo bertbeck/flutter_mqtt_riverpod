@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddYourDevice extends HookConsumerWidget {
@@ -34,7 +35,11 @@ class AddYourDevice extends HookConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20),
-                  ElevatedButton(child: const Text('Red'), onPressed: () {}),
+                  ElevatedButton(
+                      child: const Text('Red'),
+                      onPressed: () async {
+                        context.goNamed('connect to pi');
+                      }),
                   ElevatedButton(child: const Text('Blue'), onPressed: () {}),
                 ],
               ),
