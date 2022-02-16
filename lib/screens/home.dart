@@ -16,13 +16,13 @@ final _router = GoRouter(
       builder: (context, state) => const ConnectToPi(),
     ),
     GoRoute(
-      path: '/route2',
+      path: '/scanwifi',
       name: 'scan wifi',
       builder: (context, state) => const ScanWifi(),
     ),
     GoRoute(
       name: 'add wifi',
-      path: '/route3',
+      path: '/addwifi',
       builder: (context, state) => const AddWifi(),
     ),
   ],
