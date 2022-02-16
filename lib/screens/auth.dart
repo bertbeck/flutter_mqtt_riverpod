@@ -2,6 +2,7 @@ import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../shared/theme.dart';
 import 'home.dart';
 
 class Auth extends HookConsumerWidget {
@@ -14,11 +15,8 @@ class Auth extends HookConsumerWidget {
     return Authenticator(
       child: MaterialApp(
         builder: Authenticator.builder(),
-        // themeMode: ThemeMode.dark,
         title: 'Call me an app!',
-        // theme: ThemeData(
-        //   primarySwatch: Colors.blue,
-        // ),
+        theme: getGlobalTheme(),
         home: const Home(),
       ),
     );

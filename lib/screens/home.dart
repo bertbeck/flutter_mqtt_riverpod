@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'connect_to_pi.dart';
+import '../shared/theme.dart';
 import 'add_wifi.dart';
+import 'connect_to_pi.dart';
 import 'scan_wifi.dart';
 
 final _router = GoRouter(
@@ -37,9 +38,7 @@ class Home extends HookConsumerWidget {
     return MaterialApp.router(
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
-      theme: ThemeData.from(
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: const Color(0xFF5DB075))),
+      theme: getGlobalTheme(),
     );
   }
 }
