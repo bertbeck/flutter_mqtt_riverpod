@@ -9,20 +9,21 @@ import 'scan_wifi.dart';
 
 final _router = GoRouter(
   debugLogDiagnostics: true,
+  initialLocation: '/connectToPi',
   routes: [
     GoRoute(
-      path: '/',
+      path: '/connectToPi',
       name: 'connect to pi',
       builder: (context, state) => const ConnectToPi(),
     ),
     GoRoute(
-      path: '/scanwifi',
+      path: '/scanWifi',
       name: 'scan wifi',
       builder: (context, state) => const ScanWifi(),
     ),
     GoRoute(
       name: 'add wifi',
-      path: '/addwifi',
+      path: '/addWifi',
       builder: (context, state) => const AddWifi(),
     ),
   ],
