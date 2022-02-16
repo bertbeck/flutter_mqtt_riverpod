@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mqtt_riverpod/screens/add_your_device.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -9,8 +10,13 @@ import 'scan_wifi.dart';
 
 final _router = GoRouter(
   debugLogDiagnostics: true,
-  initialLocation: '/connectToPi',
+  initialLocation: '/addYourDevice',
   routes: [
+    GoRoute(
+      path: '/addYourDevice',
+      name: 'add your device',
+      builder: (context, state) => const AddYourDevice(),
+    ),
     GoRoute(
       path: '/connectToPi',
       name: 'connect to pi',

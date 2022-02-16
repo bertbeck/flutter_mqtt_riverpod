@@ -44,15 +44,6 @@ class ConnectToPiScreen extends HookConsumerWidget {
               '${getThingShadow.value}',
               // style: Theme.of(context).textTheme.headline6,
             ),
-            const Text(
-              '''
-Before attemping to connect to your pi, please ensure you have done the following:
-1. Start the pi.
-2. in your device's WiFi settings, select the Evergreen network once it is available (usually takes a half minute).
-3. Return back to this app and click the button below.
-''',
-              textAlign: TextAlign.center,
-            ),
             ElevatedButton(
               onPressed: () {
                 context.goNamed('scan wifi');
