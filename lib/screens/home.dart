@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../shared/theme.dart';
+import 'add_storage.dart';
 import 'add_your_device.dart';
 import 'authorize_device.dart';
 import 'connect_to_pi.dart';
@@ -50,6 +51,10 @@ final _router = GoRouter(
       name: 'sign in to wallet',
       builder: (context, state) => const SignInToWallet(),
     ),
+    GoRoute(
+        path: '/AddStorage',
+        name: 'add storage',
+        builder: (context, state) => const AddStorage()),
   ],
 );
 
