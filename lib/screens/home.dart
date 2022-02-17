@@ -8,6 +8,7 @@ import 'authorize_device.dart';
 import 'connect_to_pi.dart';
 import 'enter_wifi.dart';
 import 'link_device_to_account.dart';
+import 'wait_for_blue.dart';
 
 final _router = GoRouter(
   debugLogDiagnostics: true,
@@ -37,6 +38,11 @@ final _router = GoRouter(
       path: '/linkDeviceToAccount',
       name: 'link device to account',
       builder: (context, state) => const LinkDeviceToAccount(),
+    ),
+    GoRoute(
+      path: '/WaitForBlue',
+      name: 'wait for blue',
+      builder: (context, state) => const WaitForBlue(),
     ),
   ],
 );

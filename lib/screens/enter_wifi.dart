@@ -115,7 +115,7 @@ class SelectWiFi extends HookConsumerWidget {
 
                 // todo set wifi here
 
-                context.goNamed('authorize device');
+                context.goNamed('wait for blue');
               },
               child: const Text('Set WiFi!'),
             ),
