@@ -27,10 +27,10 @@ class AddYourDevice extends HookConsumerWidget {
         const SizedBox(height: 20),
         ElevatedButton(
             child: const Text('Red'),
-            onPressed: () async {
-              context.goNamed('connect to pi');
-            }),
-        ElevatedButton(child: const Text('Blue'), onPressed: () {}),
+            onPressed: () => context.goNamed('connect to pi')),
+        ElevatedButton(
+            child: const Text('Blue'),
+            onPressed: () => context.goNamed('link device to account')),
       ],
     );
   }
