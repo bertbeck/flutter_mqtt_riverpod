@@ -8,6 +8,7 @@ import 'authorize_device.dart';
 import 'connect_to_pi.dart';
 import 'enter_wifi.dart';
 import 'link_device_to_account.dart';
+import 'sign_in_to_wallet.dart';
 import 'wait_for_blue.dart';
 
 final _router = GoRouter(
@@ -43,6 +44,11 @@ final _router = GoRouter(
       path: '/WaitForBlue',
       name: 'wait for blue',
       builder: (context, state) => const WaitForBlue(),
+    ),
+    GoRoute(
+      path: '/SignInToWallet',
+      name: 'sign in to wallet',
+      builder: (context, state) => const SignInToWallet(),
     ),
   ],
 );
