@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../api/http_api.dart';
+import '../shared/my_page_frame.dart';
 
 final piProvider = Provider((ref) => 3.14);
 final wifiListProvider = FutureProvider((ref) async {
@@ -23,30 +24,11 @@ class EnterWifi extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: Container(
-        color: Colors.green,
-        alignment: Alignment.center,
-        child: SafeArea(
-          child: Center(
-            child: Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(40),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('Enter Wifi',
-                      style: Theme.of(context).textTheme.headline5),
-                  const SizedBox(height: 20),
-                  const ScanWifiScreen(),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+    return MyPageFrame(children: [
+      Text('Enter Wifi', style: Theme.of(context).textTheme.headline5),
+      const SizedBox(height: 20),
+      const ScanWifiScreen(),
+    ]);
   }
 }
 
