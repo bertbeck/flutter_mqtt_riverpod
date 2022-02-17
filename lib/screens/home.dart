@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../shared/theme.dart';
 import 'add_wifi.dart';
 import 'connect_to_pi.dart';
-import 'scan_wifi.dart';
+import 'enter_wifi.dart';
 
 final _router = GoRouter(
   debugLogDiagnostics: true,
@@ -23,9 +23,9 @@ final _router = GoRouter(
       builder: (context, state) => const ConnectToPi(),
     ),
     GoRoute(
-      path: '/scanWifi',
-      name: 'scan wifi',
-      builder: (context, state) => const ScanWifi(),
+      path: '/enterWifi',
+      name: 'enter wifi',
+      builder: (context, state) => const EnterWifi(),
     ),
     GoRoute(
       name: 'add wifi',

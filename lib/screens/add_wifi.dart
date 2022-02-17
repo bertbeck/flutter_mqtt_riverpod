@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../api/http_api.dart';
-import 'scan_wifi.dart';
+import 'enter_wifi.dart';
 
 final sendWifiProvider = FutureProvider<bool>((ref) async {
   final data = await ref.watch(apiSendWifiProvider.future);
