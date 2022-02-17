@@ -24,11 +24,28 @@ class EnterWifi extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Scan Wifi'),
+      body: Container(
+        color: Colors.green,
+        alignment: Alignment.center,
+        child: SafeArea(
+          child: Center(
+            child: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Enter Wifi',
+                      style: Theme.of(context).textTheme.headline5),
+                  const SizedBox(height: 20),
+                  const ScanWifiScreen(),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
-      body: const SafeArea(child: ScanWifiScreen()),
-      // floatingActionButton: MyFAB(),
     );
   }
 }
@@ -113,9 +130,10 @@ class SelectWiFi extends HookConsumerWidget {
               onPressed: () {
                 selectedWifiState.state = dropdownState.value;
                 passwordState.state = passwordController.text;
-                debugPrint(
-                    'CONNECTING: ${selectedWifiState.state} ${passwordController.text}');
-                context.goNamed('add wifi');
+
+                // todo set wifi here
+
+                context.goNamed('authorize device');
               },
               child: const Text('Set WiFi!'),
             ),

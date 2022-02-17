@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mqtt_riverpod/screens/add_your_device.dart';
+import 'package:flutter_mqtt_riverpod/screens/authorize_device.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../shared/theme.dart';
-import 'add_wifi.dart';
+import 'add_your_device.dart';
 import 'connect_to_pi.dart';
 import 'enter_wifi.dart';
 
@@ -28,9 +28,9 @@ final _router = GoRouter(
       builder: (context, state) => const EnterWifi(),
     ),
     GoRoute(
-      name: 'add wifi',
-      path: '/addWifi',
-      builder: (context, state) => const AddWifi(),
+      path: '/authorizeDevice',
+      name: 'authorize device',
+      builder: (context, state) => const AuthorizeDevice(),
     ),
   ],
 );
