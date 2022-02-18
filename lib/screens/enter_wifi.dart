@@ -24,41 +24,16 @@ class EnterWifi extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final wifiList = ref.watch(wifiListProvider);
     return MyPageFrame(children: [
       Text('Enter Wifi', style: Theme.of(context).textTheme.headline5),
       const SizedBox(height: 20),
-      const ScanWifiScreen(),
+      wifiList.when(
+          data: (List<String> data) => SelectWiFi(data: data),
+          error: (Object error, StackTrace? stackTrace) =>
+              Text('$error $stackTrace'),
+          loading: () => const CircularProgressIndicator()),
     ]);
-  }
-}
-
-class ScanWifiScreen extends HookConsumerWidget {
-  const ScanWifiScreen({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final wifiList = ref.watch(wifiListProvider);
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            wifiList.when(
-                data: (List<String> data) => SelectWiFi(data: data),
-                error: (Object error, StackTrace? stackTrace) =>
-                    Text('$error $stackTrace'),
-                loading: () => const CircularProgressIndicator()),
-            // Text(
-            //   'Pi says $wifiList',
-            //   textAlign: TextAlign.center,
-            // ),
-          ],
-        ),
-      ),
-    );
   }
 }
 
@@ -84,7 +59,7 @@ class SelectWiFi extends HookConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Text('$data'),
             DropdownButton<String>(
