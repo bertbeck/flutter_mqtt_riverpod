@@ -17,7 +17,7 @@ class MyPageFrame extends HookConsumerWidget {
             color: Colors.white,
             padding: const EdgeInsets.all(32),
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: children,
             ),
