@@ -29,6 +29,18 @@ class Dashboard extends HookConsumerWidget {
         .watch(getThingShadowProvider('RandalPi:farm_status'))
         .value
         ?.toJson()['state']['reported'];
+    final getWalletStatus = ref
+        .watch(getThingShadowProvider('RandalPi:wallet_status'))
+        .value
+        ?.toJson()['state']['reported'];
+    final getDeviceConfiguration = ref
+        .watch(getThingShadowProvider('RandalPi:device_config'))
+        .value
+        ?.toJson()['state']['reported'];
+    // final getDeviceStatus = ref
+    //     .watch(getThingShadowProvider('RandalPi:device_status'))
+    //     .value
+    //     ?.toJson()['state']['reported'];
 
     return MyPageFrame(
       children: [
@@ -37,9 +49,9 @@ class Dashboard extends HookConsumerWidget {
         Text('IP: ${getIp.toString()}'),
         Text('Farm Config: ${getFarmConfig.toString()}'),
         Text('Farm Status: ${getFarmStatus.toString()}'),
-        const Text('Wallet status'),
-        const Text('Device configuration'),
-        const Text('Device status'),
+        Text('Wallet Status: ${getWalletStatus.toString()}'),
+        Text('Device Configuration: ${getDeviceConfiguration.toString()}'),
+        const Text('Device status NOT AVAILABLE'),
         const SizedBox(height: 20),
         ElevatedButton(
             child: const Text('Continue'),
