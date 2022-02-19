@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../shared/my_page_frame.dart';
@@ -19,7 +20,7 @@ class AddStorage extends HookConsumerWidget {
         ElevatedButton(
             child: const Text('Continue'),
             onPressed: () {
-              // context . goNamed('authorize device');
+              context.goNamed('dashboard');
             }),
         const ElevatedButton(child: Text('Get Help'), onPressed: null),
       ],

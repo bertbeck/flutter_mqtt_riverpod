@@ -13,13 +13,16 @@ class MyPageFrame extends HookConsumerWidget {
       backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
         child: Center(
-          child: Container(
-            color: Colors.white,
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: children,
+          child: FractionallySizedBox(
+            widthFactor: 0.8,
+            heightFactor: 0.8,
+            child: Container(
+              color: Colors.white,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(32),
+              child: ListView(
+                children: children,
+              ),
             ),
           ),
         ),
