@@ -74,17 +74,18 @@ final credentialsProvider = FutureProvider(
   },
 );
 
-final getThingShadowProvider = FutureProvider((ref) async {
+final getThingShadowProvider =
+    FutureProvider.family<String, String>((ref, value) async {
+  final thingShadow = value.split(':');
   final iotDataPlane = await ref.watch(iotDataPlaneProvider.future);
   final getThingShadow = await iotDataPlane.getThingShadow(
-    thingName: 'RandalPi',
-    shadowName: 'ip',
+    thingName: thingShadow[0],
+    shadowName: thingShadow[1],
   );
-  debugPrint('getThingShadow: $getThingShadow');
+  debugPrint('getThingShadow for $value: $getThingShadow');
   String s = String.fromCharCodes(getThingShadow.payload ?? []);
   return s;
 });
-
 final getShadowListProvider = FutureProvider((ref) async {
   final iotDataPlane = await ref.watch(iotDataPlaneProvider.future);
   final getShadowList =

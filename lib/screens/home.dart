@@ -7,6 +7,7 @@ import 'add_storage.dart';
 import 'add_your_device.dart';
 import 'authorize_device.dart';
 import 'connect_to_pi.dart';
+import 'dashboard.dart';
 import 'enter_wifi.dart';
 import 'link_device_to_account.dart';
 import 'sign_in_to_wallet.dart';
@@ -14,7 +15,7 @@ import 'wait_for_blue.dart';
 
 final _router = GoRouter(
   debugLogDiagnostics: true,
-  initialLocation: '/addYourDevice',
+  initialLocation: '/Dashboard',
   routes: [
     GoRoute(
       path: '/addYourDevice',
@@ -55,6 +56,10 @@ final _router = GoRouter(
         path: '/AddStorage',
         name: 'add storage',
         builder: (context, state) => const AddStorage()),
+    GoRoute(
+        path: '/Dashboard',
+        name: 'dashboard',
+        builder: (context, state) => const Dashboard()),
   ],
 );
 
