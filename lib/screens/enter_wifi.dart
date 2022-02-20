@@ -33,7 +33,7 @@ class EnterWifi extends HookConsumerWidget {
           error: (Object error, StackTrace? stackTrace) =>
               Text('$error $stackTrace'),
           loading: () => const CircularProgressIndicator()),
-    ], bottomChildren: []);
+    ], bottomChildren: const []);
   }
 }
 
