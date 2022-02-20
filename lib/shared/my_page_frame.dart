@@ -20,8 +20,10 @@ class MyPageFrame extends HookConsumerWidget {
               color: Colors.white,
               alignment: Alignment.center,
               padding: const EdgeInsets.all(32),
-              child: ListView(
-                children: children,
+              child: CustomScrollView(
+                slivers: [
+                  SliverList(delegate: SliverChildListDelegate(children))
+                ],
               ),
             ),
           ),
