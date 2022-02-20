@@ -5,8 +5,10 @@ class MyPageFrame extends HookConsumerWidget {
   const MyPageFrame({
     Key? key,
     required this.children,
+    this.bottomChildren = const <Widget>[],
   }) : super(key: key);
   final List<Widget> children;
+  final List<Widget> bottomChildren;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -22,7 +24,16 @@ class MyPageFrame extends HookConsumerWidget {
               padding: const EdgeInsets.all(32),
               child: CustomScrollView(
                 slivers: [
-                  SliverList(delegate: SliverChildListDelegate(children))
+                  SliverList(
+                    delegate: SliverChildListDelegate(children),
+                  ),
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: bottomChildren,
+                    ),
+                  ),
                 ],
               ),
             ),

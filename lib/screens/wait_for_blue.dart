@@ -16,6 +16,8 @@ class WaitForBlue extends HookConsumerWidget {
         Text('Wait For LED to turn blue',
             style: Theme.of(context).textTheme.headline5),
         const SizedBox(height: 20),
+      ],
+      bottomChildren: [
         ElevatedButton(
             child: const Text('Continue'),
             onPressed: () {

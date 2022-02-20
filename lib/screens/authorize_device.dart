@@ -17,6 +17,8 @@ class AuthorizeDevice extends HookConsumerWidget {
         const SizedBox(height: 20),
         const Text('Connect Account Y to device X'),
         const SizedBox(height: 20),
+      ],
+      bottomChildren: [
         ElevatedButton(
             child: const Text('Continue'),
             onPressed: () {

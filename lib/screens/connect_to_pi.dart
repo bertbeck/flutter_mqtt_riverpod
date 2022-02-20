@@ -19,6 +19,8 @@ class ConnectToPi extends HookConsumerWidget {
         const Text(
             '1. Connect to Device Hotspot (named something that begins with Evergreen).'),
         const SizedBox(height: 20),
+      ],
+      bottomChildren: [
         ElevatedButton(
             child: const Text('Continue'),
             onPressed: () {

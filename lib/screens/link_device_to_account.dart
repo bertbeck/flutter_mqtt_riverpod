@@ -18,6 +18,8 @@ class LinkDeviceToAccount extends HookConsumerWidget {
         const SizedBox(height: 20),
         const Text('Enter Device ID'), //todo add device id field
         const SizedBox(height: 20),
+      ],
+      bottomChildren: [
         ElevatedButton(
             child: const Text('Continue'),
             onPressed: () {

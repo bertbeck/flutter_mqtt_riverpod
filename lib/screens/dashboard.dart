@@ -53,6 +53,8 @@ class Dashboard extends HookConsumerWidget {
         Text('Device Configuration: ${getDeviceConfiguration.toString()}'),
         Text('Device Status: ${getDeviceStatus.toString()}'),
         const SizedBox(height: 20),
+      ],
+      bottomChildren: [
         ElevatedButton(
             child: const Text('Continue'),
             onPressed: () {

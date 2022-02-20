@@ -25,6 +25,8 @@ class AddYourDevice extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 20),
+      ],
+      bottomChildren: [
         ElevatedButton(
             child: const Text('Red'),
             onPressed: () => context.goNamed('connect to pi')),

@@ -17,6 +17,8 @@ class AddStorage extends HookConsumerWidget {
         const SizedBox(height: 20),
         const Text('Sign in to the official wallet on your device.'),
         const SizedBox(height: 20),
+      ],
+      bottomChildren: [
         ElevatedButton(
             child: const Text('Continue'),
             onPressed: () {
