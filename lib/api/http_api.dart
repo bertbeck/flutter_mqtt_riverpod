@@ -4,16 +4,37 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 
 import '../screens/enter_wifi.dart';
+import 'iot.dart';
 
 final endpoint = Uri.parse('http://10.42.0.1:5000/wifi/scan');
 final endpoint2 = Uri.parse('http://10.42.0.1:5000/wifi/set');
+final uuidEndpoint = Uri.parse('http://10.42.0.1:5000/uuid/generate');
+final setCredentialsEndpoint =
+    Uri.parse('http://10.42.0.1:5000/credentials/set');
 
+final getPiIsOnlineEndpoint = Uri.parse('http://10.42.0.1:5000/wifi/is_global');
 // final endpoint = Uri.parse('http://10.0.0.20:5000/wifi/scan');
 // final endpoint2 = Uri.parse('http://10.0.0.20:5000/wifi/set');
 
 final uri1 = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
 final uri2 = uri1.replace(path: 'todos/2');
 final httpClientProvider = Provider((_) => Client());
+
+final getUuidProvider = FutureProvider((ref) async {
+  final client = ref.watch(httpClientProvider);
+  final response =
+      await client.get(uuidEndpoint, headers: {'Accept': 'application/json'});
+  final decoded = jsonDecode(response.body);
+  return decoded['uuid'] as String;
+});
+
+final getIsPiOnlineProvider = FutureProvider((ref) async {
+  final client = ref.watch(httpClientProvider);
+  final response = await client
+      .get(getPiIsOnlineEndpoint, headers: {'Accept': 'application/json'});
+  final decoded = jsonDecode(response.body);
+  return decoded['status'] as bool;
+});
 
 final apiWifiListProvider = FutureProvider<List<String>>((ref) async {
   final client = ref.watch(httpClientProvider);
@@ -36,6 +57,25 @@ final apiSendWifiProvider = FutureProvider((ref) async {
   final password = ref.watch(wifiPasswordProvider);
   final endwithargs = endpoint2
       .replace(queryParameters: {'ssid': selectedWifi, 'password': password});
+  final response =
+      await client.get(endwithargs, headers: {'Accept': 'application/json'});
+  final decoded = jsonDecode(response.body);
+  return decoded;
+});
+
+final sendCredentials = FutureProvider((ref) async {
+  final client = ref.watch(httpClientProvider);
+
+  final credentials = await ref.watch(credentialsProvider.future);
+  final accessKey = credentials.accessKey;
+  final secretKey = credentials.secretKey;
+  final sessionToken = credentials.sessionToken;
+
+  final endwithargs = setCredentialsEndpoint.replace(queryParameters: {
+    'accessKey': accessKey,
+    'secretKey': secretKey,
+    'sessionToken': sessionToken
+  });
   final response =
       await client.get(endwithargs, headers: {'Accept': 'application/json'});
   final decoded = jsonDecode(response.body);
