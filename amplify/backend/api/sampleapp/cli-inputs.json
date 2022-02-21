@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "sampleapp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-2807b159-0e8e-4804-81e8-a48d4b830dd8/amplify/backend/api/sampleapp/schema.graphql",
+    "gqlSchemaPath": "/Users/merlyn/Projects/Evergreen/Git/flutter_mqtt_riverpod/amplify/backend/api/sampleapp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
