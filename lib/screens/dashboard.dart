@@ -17,30 +17,36 @@ class Dashboard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final getIp = ref
-    //     .watch(getThingShadowProvider('RandalPi:ip'))
-    //     .value
-    //     ?.toJson()['state']['reported'];
-    // final getFarmConfig = ref
-    //     .watch(getThingShadowProvider('RandalPi:farm_config'))
-    //     .value
-    //     ?.toJson()['state']['reported'];
-    // final getFarmStatus = ref
-    //     .watch(getThingShadowProvider('RandalPi:farm_status'))
-    //     .value
-    //     ?.toJson()['state']['reported'];
-    // final getWalletStatus = ref
-    //     .watch(getThingShadowProvider('RandalPi:wallet_status'))
-    //     .value
-    //     ?.toJson()['state']['reported'];
-    // final getDeviceConfiguration = ref
-    //     .watch(getThingShadowProvider('RandalPi:device_config'))
-    //     .value
-    //     ?.toJson()['state']['reported'];
-    // final getDeviceStatus = ref
-    //     .watch(getThingShadowProvider('RandalPi:device_status'))
-    //     .value
-    //     ?.toJson()['state']['reported'];
+    final getIp = ref
+        .watch(getThingShadowProvider('RandalPi:ip'))
+        .value
+        ?.toJson()['state']['reported'];
+    debugPrint('ip: $getIp');
+    final getFarmConfig = ref
+        .watch(getThingShadowProvider('RandalPi:farm_config'))
+        .value
+        ?.toJson()['state']['reported'];
+    debugPrint('farm config: $getFarmConfig');
+    final getFarmStatus = ref
+        .watch(getThingShadowProvider('RandalPi:farm_status'))
+        .value
+        ?.toJson()['state']['reported'];
+    debugPrint('farm status: $getFarmStatus');
+    final getWalletStatus = ref
+        .watch(getThingShadowProvider('RandalPi:wallet_status'))
+        .value
+        ?.toJson()['state']['reported'];
+    debugPrint('wallet status: $getWalletStatus');
+    final getDeviceConfiguration = ref
+        .watch(getThingShadowProvider('RandalPi:device_config'))
+        .value
+        ?.toJson()['state']['reported'];
+    debugPrint('device config: $getDeviceConfiguration');
+    final getDeviceStatus = ref
+        .watch(getThingShadowProvider('RandalPi:device_status'))
+        .value
+        ?.toJson()['state']['reported'];
+    debugPrint('device status: $getDeviceStatus');
 
     final textTheme = Theme.of(context).textTheme;
 
@@ -83,8 +89,9 @@ class Dashboard extends HookConsumerWidget {
                                     textBaseline: TextBaseline.ideographic,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text('6.2', style: textTheme.headline2),
-                                      Text('XCH', style: textTheme.headline6),
+                                      Text('${getWalletStatus?['Balance']}',
+                                          style: textTheme.headline2),
+                                      // Text('XCH', style: textTheme.headline6),
                                     ],
                                   ),
                                   Row(
@@ -127,9 +134,10 @@ class Dashboard extends HookConsumerWidget {
                                         CrossAxisAlignment.baseline,
                                     textBaseline: TextBaseline.ideographic,
                                     children: [
-                                      Text('0.006144',
+                                      Text(
+                                          '${getFarmStatus?['Current Profitability']}',
                                           style: textTheme.headline4),
-                                      Text('XCH', style: textTheme.headline6),
+                                      // Text('XCH', style: textTheme.headline6),
                                     ],
                                   ),
                                   Row(
@@ -236,7 +244,8 @@ class Dashboard extends HookConsumerWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text('Farming for 5 days',
+                                                Text(
+                                                    'Farming for ${getFarmStatus?['uptime']}',
                                                     style: textTheme.bodyText1),
                                               ],
                                             ),
@@ -280,7 +289,8 @@ class Dashboard extends HookConsumerWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text('3TiB',
+                                                Text(
+                                                    '${getFarmConfig?['Estimated plot size']}',
                                                     style: textTheme.subtitle1),
                                               ],
                                             ),
