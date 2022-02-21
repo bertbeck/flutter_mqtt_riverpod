@@ -77,7 +77,6 @@ class Dashboard extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text('Wallet 1', style: textTheme.headline6),
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.baseline,
@@ -117,7 +116,7 @@ class Dashboard extends HookConsumerWidget {
                                         CrossAxisAlignment.baseline,
                                     textBaseline: TextBaseline.ideographic,
                                     children: [
-                                      Text('Current Profitability',
+                                      Text('Current Income',
                                           style: textTheme.headline6),
                                       Text('daily', style: textTheme.bodyText1),
                                     ],
@@ -142,7 +141,69 @@ class Dashboard extends HookConsumerWidget {
                                       Text('\$1.68',
                                           style: textTheme.bodyText1),
                                     ],
-                                  )
+                                  ),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text('Farming',
+                                            style: textTheme.bodyText1),
+                                      ]),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Card(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text('Coins', style: textTheme.headline6),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: const [
+                                      FlutterLogo(
+                                        size: 48,
+                                      ),
+                                      FlutterLogo(
+                                        size: 48,
+                                      ),
+                                      FlutterLogo(
+                                        size: 48,
+                                      ),
+                                      FlutterLogo(
+                                        size: 48,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Card(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text('Apps', style: textTheme.headline6),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: const [
+                                      FlutterLogo(
+                                        size: 48,
+                                      ),
+                                      FlutterLogo(
+                                        size: 48,
+                                      ),
+                                      FlutterLogo(
+                                        size: 48,
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -152,45 +213,8 @@ class Dashboard extends HookConsumerWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text('Stats', style: textTheme.headline6),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Placeholder(
-                                        fallbackHeight: 100,
-                                        fallbackWidth: 100),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ButtonBar(children: [
-                                      ElevatedButton(
-                                        child: const Text('Day 1'),
-                                        onPressed: () {},
-                                      ),
-                                      ElevatedButton(
-                                        child: const Text('Day 2'),
-                                        onPressed: () {},
-                                      ),
-                                      ElevatedButton(
-                                        child: const Text('Day 3'),
-                                        onPressed: () {},
-                                      ),
-                                    ]),
-                                  ],
-                                ),
-                              ]),
-                            ),
-                            const SizedBox(height: 16),
-                            Card(
-                              child: Column(children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text('Plots', style: textTheme.headline6),
+                                    Text('HDD Farm',
+                                        style: textTheme.headline6),
                                   ],
                                 ),
                                 Table(
@@ -204,7 +228,7 @@ class Dashboard extends HookConsumerWidget {
                                           children: [
                                             Row(
                                               children: [
-                                                Text('Estimated Plot Size',
+                                                Text('Status',
                                                     style: textTheme.subtitle2),
                                               ],
                                             ),
@@ -212,10 +236,8 @@ class Dashboard extends HookConsumerWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text('6.2',
-                                                    style: textTheme.headline4),
-                                                Text('TiB',
-                                                    style: textTheme.headline6),
+                                                Text('Farming for 5 days',
+                                                    style: textTheme.bodyText1),
                                               ],
                                             ),
                                           ],
@@ -227,7 +249,7 @@ class Dashboard extends HookConsumerWidget {
                                           children: [
                                             Row(
                                               children: [
-                                                Text('Plot Count',
+                                                Text('Pool',
                                                     style: textTheme.subtitle1),
                                               ],
                                             ),
@@ -235,8 +257,8 @@ class Dashboard extends HookConsumerWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text('31',
-                                                    style: textTheme.headline4),
+                                                Text('Flex Pool',
+                                                    style: textTheme.bodyText1),
                                               ],
                                             ),
                                           ],
@@ -250,7 +272,7 @@ class Dashboard extends HookConsumerWidget {
                                           children: [
                                             Row(
                                               children: [
-                                                Text('Status',
+                                                Text('Size of farm',
                                                     style: textTheme.subtitle1),
                                               ],
                                             ),
@@ -258,7 +280,7 @@ class Dashboard extends HookConsumerWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text('farming for X time',
+                                                Text('3TiB',
                                                     style: textTheme.subtitle1),
                                               ],
                                             ),
@@ -271,7 +293,7 @@ class Dashboard extends HookConsumerWidget {
                                           children: [
                                             Row(
                                               children: [
-                                                Text('Add Plots',
+                                                Text('Manage Storage',
                                                     style: textTheme.subtitle1),
                                               ],
                                             ),

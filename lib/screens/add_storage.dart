@@ -15,8 +15,6 @@ class AddStorage extends HookConsumerWidget {
       children: [
         Text('Add Storage', style: Theme.of(context).textTheme.headline5),
         const SizedBox(height: 20),
-        const Text('Sign in to the official wallet on your device.'),
-        const SizedBox(height: 20),
       ],
       bottomChildren: [
         ElevatedButton(

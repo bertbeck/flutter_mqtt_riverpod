@@ -13,9 +13,14 @@ class SignInToWallet extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MyPageFrame(
       children: [
-        Text('Sign In To Wallet', style: Theme.of(context).textTheme.headline5),
+        Text('Sign In To FarmermWallet',
+            style: Theme.of(context).textTheme.headline5),
         const SizedBox(height: 20),
-        const Text('Sign in to the official wallet on your device.'),
+        TextFormField(
+          decoration: const InputDecoration(
+            labelText: 'Wallet passphrase',
+          ),
+        ),
         const SizedBox(height: 20),
       ],
       bottomChildren: [

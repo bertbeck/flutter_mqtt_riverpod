@@ -13,11 +13,8 @@ class ConnectToPi extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MyPageFrame(
       children: [
-        Text('Connect Device to Wifi',
+        Text('Connect to Evergreen',
             style: Theme.of(context).textTheme.headline5),
-        const SizedBox(height: 20),
-        const Text(
-            '1. Connect to Device Hotspot (named something that begins with Evergreen).'),
         const SizedBox(height: 20),
       ],
       bottomChildren: [

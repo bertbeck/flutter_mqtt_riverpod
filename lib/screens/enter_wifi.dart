@@ -26,7 +26,7 @@ class EnterWifi extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final wifiList = ref.watch(wifiListProvider);
     return MyPageFrame(children: [
-      Text('Enter Wifi', style: Theme.of(context).textTheme.headline5),
+      Text('Add WiFi', style: Theme.of(context).textTheme.headline5),
       const SizedBox(height: 20),
       wifiList.when(
           data: (List<String> data) => SelectWiFi(data: data),
@@ -90,7 +90,7 @@ class SelectWiFi extends HookConsumerWidget {
 
                 // todo set wifi here
 
-                context.goNamed('wait for blue');
+                context.goNamed('authorize device');
               },
               child: const Text('Set WiFi!'),
             ),

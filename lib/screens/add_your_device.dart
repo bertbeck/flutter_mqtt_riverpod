@@ -16,11 +16,7 @@ class AddYourDevice extends HookConsumerWidget {
         Text('Add Your Device', style: Theme.of(context).textTheme.headline5),
         const SizedBox(height: 20),
         const Text(
-          '''
-1. Connect your Device to Ethernet (optional).
-2. Plug your Device into Power.
-3. Wait 3 Minutes.
-4. Is the LED Red or Blue?
+          '''Do you see the Evergreen hotspot?
 ''',
           textAlign: TextAlign.center,
         ),
@@ -28,11 +24,9 @@ class AddYourDevice extends HookConsumerWidget {
       ],
       bottomChildren: [
         ElevatedButton(
-            child: const Text('Red'),
+            child: const Text('Yes'),
             onPressed: () => context.goNamed('connect to pi')),
-        ElevatedButton(
-            child: const Text('Blue'),
-            onPressed: () => context.goNamed('link device to account')),
+        const ElevatedButton(child: Text('No'), onPressed: null),
       ],
     );
   }
