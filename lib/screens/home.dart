@@ -15,7 +15,7 @@ import 'wait_for_blue.dart';
 
 final _router = GoRouter(
   debugLogDiagnostics: true,
-  initialLocation: '/Dashboard',
+  initialLocation: '/addYourDevice',
   routes: [
     GoRoute(
       path: '/addYourDevice',
