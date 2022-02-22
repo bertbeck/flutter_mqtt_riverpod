@@ -19,16 +19,16 @@
 
 // ignore_for_file: public_member_api_docs, file_names, unnecessary_new, prefer_if_null_operators, prefer_const_constructors, slash_for_doc_comments, annotate_overrides, non_constant_identifier_names, unnecessary_string_interpolations, prefer_adjacent_string_concatenation, unnecessary_const, dead_code
 
-import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
+import 'package:amplify_core/amplify_core.dart';
 import 'package:flutter/foundation.dart';
 
 
-/** This is an auto generated class representing the DEVICES type in your schema. */
+/** This is an auto generated class representing the Devices type in your schema. */
 @immutable
-class DEVICES extends Model {
-  static const classType = const _DEVICESModelType();
+class Devices extends Model {
+  static const classType = const _DevicesModelType();
   final String id;
-  final String? _UUID1;
+  final String? _uuid1;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -40,8 +40,8 @@ class DEVICES extends Model {
     return id;
   }
   
-  String? get UUID1 {
-    return _UUID1;
+  String? get uuid1 {
+    return _uuid1;
   }
   
   TemporalDateTime? get createdAt {
@@ -52,12 +52,12 @@ class DEVICES extends Model {
     return _updatedAt;
   }
   
-  const DEVICES._internal({required this.id, UUID1, createdAt, updatedAt}): _UUID1 = UUID1, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Devices._internal({required this.id, uuid1, createdAt, updatedAt}): _uuid1 = uuid1, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory DEVICES({String? id, String? UUID1}) {
-    return DEVICES._internal(
+  factory Devices({String? id, String? uuid1}) {
+    return Devices._internal(
       id: id == null ? UUID.getUUID() : id,
-      UUID1: UUID1);
+      uuid1: uuid1);
   }
   
   bool equals(Object other) {
@@ -67,9 +67,9 @@ class DEVICES extends Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DEVICES &&
+    return other is Devices &&
       id == other.id &&
-      _UUID1 == other._UUID1;
+      _uuid1 == other._uuid1;
   }
   
   @override
@@ -79,9 +79,9 @@ class DEVICES extends Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("DEVICES {");
+    buffer.write("Devices {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("UUID1=" + "$_UUID1" + ", ");
+    buffer.write("uuid1=" + "$_uuid1" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -89,42 +89,31 @@ class DEVICES extends Model {
     return buffer.toString();
   }
   
-  DEVICES copyWith({String? id, String? UUID1}) {
-    return DEVICES._internal(
+  Devices copyWith({String? id, String? uuid1}) {
+    return Devices._internal(
       id: id ?? this.id,
-      UUID1: UUID1 ?? this.UUID1);
+      uuid1: uuid1 ?? this.uuid1);
   }
   
-  DEVICES.fromJson(Map<String, dynamic> json)  
+  Devices.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _UUID1 = json['UUID1'],
+      _uuid1 = json['uuid1'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'UUID1': _UUID1, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'uuid1': _uuid1, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
-  static final QueryField ID = QueryField(fieldName: "dEVICES.id");
-  static final QueryField UUID1 = QueryField(fieldName: "UUID1");
+  static final QueryField ID = QueryField(fieldName: "devices.id");
+  static final QueryField UUID1 = QueryField(fieldName: "uuid1");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "DEVICES";
-    modelSchemaDefinition.pluralName = "DEVICES";
+    modelSchemaDefinition.name = "Devices";
+    modelSchemaDefinition.pluralName = "Devices";
     
     modelSchemaDefinition.authRules = [
       AuthRule(
         authStrategy: AuthStrategy.PUBLIC,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
-        ]),
-      AuthRule(
-        authStrategy: AuthStrategy.OWNER,
-        ownerField: "owner",
-        identityClaim: "cognito:username",
-        provider: AuthRuleProvider.USERPOOLS,
         operations: [
           ModelOperation.CREATE,
           ModelOperation.UPDATE,
@@ -136,7 +125,7 @@ class DEVICES extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: DEVICES.UUID1,
+      key: Devices.UUID1,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
@@ -157,11 +146,11 @@ class DEVICES extends Model {
   });
 }
 
-class _DEVICESModelType extends ModelType<DEVICES> {
-  const _DEVICESModelType();
+class _DevicesModelType extends ModelType<Devices> {
+  const _DevicesModelType();
   
   @override
-  DEVICES fromJson(Map<String, dynamic> jsonData) {
-    return DEVICES.fromJson(jsonData);
+  Devices fromJson(Map<String, dynamic> jsonData) {
+    return Devices.fromJson(jsonData);
   }
 }

@@ -49,19 +49,12 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 30,
-              "apiKeyExpirationDate": "2022-03-24T00:33:23.979Z",
-              "description": "the API key"
+              "description": "api key description"
             }
           },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
-            },
-            {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authsampleapp"
-              }
             }
           ]
         }

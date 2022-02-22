@@ -3,20 +3,15 @@
   "serviceConfiguration": {
     "apiName": "sampleapp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/merlyn/Projects/Evergreen/Git/flutter_mqtt_riverpod/amplify/backend/api/sampleapp/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-3e4f6c57-7fa2-432f-854b-4e8298177644/amplify/backend/api/sampleapp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 30,
-      "apiKeyExpirationDate": "2022-03-24T00:33:23.979Z",
-      "keyDescription": "the API key"
+      "keyDescription": "api key description",
+      "expirationTime": 30
     },
     "additionalAuthTypes": [
       {
         "mode": "AWS_IAM"
-      },
-      {
-        "mode": "AMAZON_COGNITO_USER_POOLS",
-        "cognitoUserPoolId": "authsampleapp"
       }
     ],
     "conflictResolution": {
