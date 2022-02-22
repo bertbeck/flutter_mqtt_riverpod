@@ -10,6 +10,7 @@ dependencies:
   amplify_authenticator: 0.1.0-rc.6
   amplify_datastore: ^0.4.0
   amplify_flutter: ^0.4.0
+  aws_greengrass_api: ^1.2.0
   aws_iot_api: ^1.2.0
   aws_iot_data_api: ^1.2.0
   cupertino_icons: ^1.0.4

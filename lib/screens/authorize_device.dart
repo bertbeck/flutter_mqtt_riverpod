@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+import '../api/iot.dart';
 import '../shared/my_page_frame.dart';
 
 final mockCreatePolicyProvider =
@@ -45,7 +46,7 @@ class _CreatePolicy extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final createPolicy = ref.watch(mockCreatePolicyProvider);
+    final createPolicy = ref.watch(setIotPolicyProvider);
     return createPolicy.when(
       data: (data) => const _AttachPolicy(),
       loading: () => JumpingText('creating aws policy..'),
@@ -61,7 +62,7 @@ class _AttachPolicy extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final attachPolicy = ref.watch(mockAttachPolicyProvider);
+    final attachPolicy = ref.watch(setAttachIotPolicyProvider);
     return attachPolicy.when(
       data: (data) => const _WaitForPiRegistration(),
       loading: () => JumpingText('attaching aws policy..'),

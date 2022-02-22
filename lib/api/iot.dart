@@ -1,5 +1,6 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:aws_greengrass_api/greengrass-2017-06-07.dart';
 import 'package:aws_iot_api/iot-2015-05-28.dart';
 import 'package:aws_iot_data_api/iot-data-2015-05-28.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,17 @@ final getIotProvider = FutureProvider((ref) async {
   );
   debugPrint('iot: $iot');
   return iot;
+});
+
+final getGreengrassProvider = FutureProvider((ref) async {
+  final clientCredentials = await ref.watch(getAwsCredentialsProvider.future);
+  final greengrass = Greengrass(
+    region: 'us-west-2',
+    credentials: clientCredentials,
+    endpointUrl: _awsIotEndpoint,
+  );
+  debugPrint('iot: $greengrass');
+  return greengrass;
 });
 
 final getIotEndpointProvider = FutureProvider((ref) async {
@@ -81,6 +93,7 @@ final setAttachIotPolicyProvider = FutureProvider((ref) async {
 
   return attachPolicy;
 });
+
 final iotDataPlaneProvider = FutureProvider((ref) async {
   final clientCredentials = await ref.watch(getAwsCredentialsProvider.future);
   final iotDataPlane = IoTDataPlane(
