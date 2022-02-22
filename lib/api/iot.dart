@@ -40,6 +40,15 @@ final getGreengrassProvider = FutureProvider((ref) async {
   return greengrass;
 });
 
+final getConnectivityProvider = FutureProvider((ref) async {
+  final greengrass = await ref.watch(getGreengrassProvider.future);
+  final uuid = await ref.watch(getUuidProvider.future);
+  final getConnectivity = await greengrass.getConnectivityInfo(thingName: uuid);
+
+  // debugPrint('getPolicy: $getPolicy');
+  return getConnectivity;
+});
+
 final getIotEndpointProvider = FutureProvider((ref) async {
   final iot = await ref.read(getIotProvider.future);
   final describeEndpoint = await iot.describeEndpoint(
