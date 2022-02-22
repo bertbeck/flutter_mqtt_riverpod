@@ -7,11 +7,6 @@ import '../api/http_api.dart';
 import '../shared/my_page_frame.dart';
 
 final piProvider = Provider((ref) => 3.14);
-final wifiListProvider = FutureProvider((ref) async {
-  final data = await ref.watch(apiWifiListProvider.future);
-  debugPrint('wifiListProvider: $data');
-  return data;
-});
 
 // shared state
 final selectedWifiProvider = StateProvider((ref) => '');
@@ -24,7 +19,7 @@ class EnterWifi extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final wifiList = ref.watch(wifiListProvider);
+    final wifiList = ref.watch(getWifiListProvider);
     return MyPageFrame(children: [
       Text('Add WiFi', style: Theme.of(context).textTheme.headline5),
       const SizedBox(height: 20),

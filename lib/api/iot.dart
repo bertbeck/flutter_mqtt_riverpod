@@ -10,13 +10,13 @@ const String _awsIotEndpoint = 'https://iot.us-west-2.amazonaws.com';
 const String _awsDataPlaneEndpoint =
     "https://a2fa43d73ede4i-ats.iot.us-west-2.amazonaws.com";
 
-final authSessionProvider =
+final getAuthSessionProvider =
     FutureProvider((ref) async => await Amplify.Auth.fetchAuthSession(
           options: CognitoSessionOptions(getAWSCredentials: true),
         ) as CognitoAuthSession);
 
-final iotProvider = FutureProvider((ref) async {
-  final clientCredentials = await ref.watch(credentialsProvider.future);
+final getIotProvider = FutureProvider((ref) async {
+  final clientCredentials = await ref.watch(getAwsCredentialsProvider.future);
   final iot = IoT(
     region: 'us-west-2',
     credentials: clientCredentials,
@@ -26,8 +26,8 @@ final iotProvider = FutureProvider((ref) async {
   return iot;
 });
 
-final describeEndpointProvider = FutureProvider((ref) async {
-  final iot = await ref.read(iotProvider.future);
+final getIotEndpointProvider = FutureProvider((ref) async {
+  final iot = await ref.read(getIotProvider.future);
   final describeEndpoint = await iot.describeEndpoint(
     endpointType: 'iot:CredentialProvider',
   );
@@ -36,8 +36,8 @@ final describeEndpointProvider = FutureProvider((ref) async {
   return describeEndpoint;
 });
 
-final getPolicyProvider = FutureProvider((ref) async {
-  final iot = await ref.watch(iotProvider.future);
+final getIotPolicyProvider = FutureProvider((ref) async {
+  final iot = await ref.watch(getIotProvider.future);
   final getPolicy = await iot.getPolicy(
     policyName: 'endOurTears',
   );
@@ -47,7 +47,7 @@ final getPolicyProvider = FutureProvider((ref) async {
 });
 
 final iotDataPlaneProvider = FutureProvider((ref) async {
-  final clientCredentials = await ref.watch(credentialsProvider.future);
+  final clientCredentials = await ref.watch(getAwsCredentialsProvider.future);
   final iotDataPlane = IoTDataPlane(
     region: 'us-west-2',
     credentials: clientCredentials,
@@ -57,9 +57,9 @@ final iotDataPlaneProvider = FutureProvider((ref) async {
   return iotDataPlane;
 });
 
-final credentialsProvider = FutureProvider(
+final getAwsCredentialsProvider = FutureProvider(
   (ref) async {
-    final session = await ref.watch(authSessionProvider.future);
+    final session = await ref.watch(getAuthSessionProvider.future);
     debugPrint('session: $session');
     final credentials = session.credentials;
     final awsAccessKey = credentials?.awsAccessKey ?? 'missing';

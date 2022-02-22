@@ -18,14 +18,20 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       overrides: [
-        apiWifiListProvider.overrideWithValue(
+        getWifiListProvider.overrideWithValue(
           const AsyncValue.data(
             ['a', 'b', 'c'],
           ),
         ),
-        apiSendWifiProvider.overrideWithValue(
+        setWifiOnPiProvider.overrideWithValue(
           const AsyncValue.data(true),
-        )
+        ),
+        getUuidProvider.overrideWithValue(
+          const AsyncValue.data('abcdefghijklmnopqrstuvwxyz'),
+        ),
+        getIsPiOnlineProvider.overrideWithValue(
+          const AsyncValue.data(false),
+        ),
       ],
       child: const Auth(),
     ),

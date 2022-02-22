@@ -36,7 +36,7 @@ final getIsPiOnlineProvider = FutureProvider((ref) async {
   return decoded['status'] as bool;
 });
 
-final apiWifiListProvider = FutureProvider<List<String>>((ref) async {
+final getWifiListProvider = FutureProvider<List<String>>((ref) async {
   final client = ref.watch(httpClientProvider);
   final response =
       await client.get(endpoint, headers: {'Accept': 'application/json'});
@@ -51,7 +51,7 @@ final apiWifiListProvider = FutureProvider<List<String>>((ref) async {
   return wifiList;
 });
 
-final apiSendWifiProvider = FutureProvider((ref) async {
+final setWifiOnPiProvider = FutureProvider((ref) async {
   final client = ref.watch(httpClientProvider);
   final selectedWifi = ref.watch(selectedWifiProvider);
   final password = ref.watch(wifiPasswordProvider);
@@ -63,10 +63,10 @@ final apiSendWifiProvider = FutureProvider((ref) async {
   return decoded;
 });
 
-final sendCredentials = FutureProvider((ref) async {
+final setCredentialsOnPiProvider = FutureProvider((ref) async {
   final client = ref.watch(httpClientProvider);
 
-  final credentials = await ref.watch(credentialsProvider.future);
+  final credentials = await ref.watch(getAwsCredentialsProvider.future);
   final accessKey = credentials.accessKey;
   final secretKey = credentials.secretKey;
   final sessionToken = credentials.sessionToken;
