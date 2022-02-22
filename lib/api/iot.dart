@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 
+import 'http_api.dart';
+
 const String _awsIotEndpoint = 'https://iot.us-west-2.amazonaws.com';
 const String _awsDataPlaneEndpoint =
     "https://a2fa43d73ede4i-ats.iot.us-west-2.amazonaws.com";
@@ -46,6 +48,39 @@ final getIotPolicyProvider = FutureProvider((ref) async {
   return getPolicy;
 });
 
+final setIotPolicyProvider = FutureProvider((ref) async {
+  final iot = await ref.watch(getIotProvider.future);
+  final uuid = await ref.watch(getUuidProvider.future);
+  final createPolicy = await iot.createPolicy(policyDocument: '''
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "iot:GetThingShadow",
+      "Resource": "arn:aws:iot:us-west-2:801365708500:thing/{$uuid}/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "greengrass:Discover",
+      "Resource": "arn:aws:iot:us-west-2:801365708500:thing/{$uuid}"
+    }
+  ]
+}
+
+''', policyName: uuid);
+
+  return createPolicy;
+});
+final setAttachIotPolicyProvider = FutureProvider((ref) async {
+  final iot = await ref.watch(getIotProvider.future);
+  final uuid = await ref.watch(getUuidProvider.future);
+  final session = await ref.watch(getAuthSessionProvider.future);
+  final id = session.identityId ?? 'unknown';
+  final attachPolicy = await iot.attachPolicy(target: id, policyName: uuid);
+
+  return attachPolicy;
+});
 final iotDataPlaneProvider = FutureProvider((ref) async {
   final clientCredentials = await ref.watch(getAwsCredentialsProvider.future);
   final iotDataPlane = IoTDataPlane(
@@ -70,6 +105,7 @@ final getAwsCredentialsProvider = FutureProvider(
         secretKey: awsSecretKey,
         sessionToken: awsSessionToken);
     debugPrint('clientCredentials: $clientCredentials');
+
     return clientCredentials;
   },
 );

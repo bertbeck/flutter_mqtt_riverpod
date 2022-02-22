@@ -27,7 +27,7 @@ Future<void> main() async {
           const AsyncValue.data(true),
         ),
         getUuidProvider.overrideWithValue(
-          const AsyncValue.data('abcdefghijklmnopqrstuvwxyz'),
+          const AsyncValue.data('RandalPi'),
         ),
         getIsPiOnlineProvider.overrideWithValue(
           const AsyncValue.data(false),
