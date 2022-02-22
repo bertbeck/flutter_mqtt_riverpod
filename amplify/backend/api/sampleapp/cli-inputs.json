@@ -6,8 +6,9 @@
     "gqlSchemaPath": "/Users/merlyn/Projects/Evergreen/Git/flutter_mqtt_riverpod/amplify/backend/api/sampleapp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "keyDescription": "api key description",
-      "expirationTime": 30
+      "expirationTime": 30,
+      "apiKeyExpirationDate": "2022-03-24T00:33:23.979Z",
+      "keyDescription": "the API key"
     },
     "additionalAuthTypes": [
       {
