@@ -12,6 +12,8 @@ import 'http_api.dart';
 const String _awsIotEndpoint = 'https://iot.us-west-2.amazonaws.com';
 const String _awsDataPlaneEndpoint =
     "https://a2fa43d73ede4i-ats.iot.us-west-2.amazonaws.com";
+const String _awsGreengrassDiscoveryEndpoint =
+    "https://greengrass-ats.iot.us-west-2.amazonaws.com	";
 
 final getAuthSessionProvider =
     FutureProvider((ref) async => await Amplify.Auth.fetchAuthSession(
@@ -34,7 +36,7 @@ final getGreengrassProvider = FutureProvider((ref) async {
   final greengrass = Greengrass(
     region: 'us-west-2',
     credentials: clientCredentials,
-    endpointUrl: _awsDataPlaneEndpoint,
+    endpointUrl: _awsGreengrassDiscoveryEndpoint,
   );
   debugPrint('iot: $greengrass');
   return greengrass;
