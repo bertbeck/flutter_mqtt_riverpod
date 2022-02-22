@@ -21,8 +21,8 @@ class AuthorizeDevice extends HookConsumerWidget {
         // TODO: Create policy with thingname
         // TODO: Attach Policy to Cognito user
         // TODO: wait for pi to register with server (greengrass.thingconnectivity), and store IP address
-        // TODO: move thing to authorized group
-        // TODO: wait for pi greengrass deployment success
+        // TODO: move thing to authorized group 
+        // TODO: wait for pi greengrass deployment success via runtime shadow, componenents running > 5
        
       ],
       bottomChildren: [
