@@ -17,12 +17,13 @@ class AuthorizeDevice extends HookConsumerWidget {
         const SizedBox(height: 20),
         const Text('Connect Account Y to device X'),
         const SizedBox(height: 20),
-
-        // TODO: wait for pi to register with server (iot.thingconnectivity)
-
+        
+        // TODO: Create policy with thingname
+        // TODO: Attach Policy to Cognito user
+        // TODO: wait for pi to register with server (greengrass.thingconnectivity), and store IP address
         // TODO: move thing to authorized group
         // TODO: wait for pi greengrass deployment success
-        // TODO: get ip from shadow
+       
       ],
       bottomChildren: [
         ElevatedButton(
