@@ -46,7 +46,8 @@ class _CreatePolicy extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final createPolicy = ref.watch(setIotPolicyProvider);
+    // final createPolicy = ref.watch(setIotPolicyProvider);
+    final createPolicy = ref.watch(mockCreatePolicyProvider);
     return createPolicy.when(
       data: (data) => const _AttachPolicy(),
       loading: () => JumpingText('creating aws policy..'),

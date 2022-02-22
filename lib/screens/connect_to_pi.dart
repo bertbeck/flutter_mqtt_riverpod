@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
+// ignore: unused_import
 import '../api/http_api.dart';
 import '../shared/my_page_frame.dart';
+
+final mockGetUuidProvider = FutureProvider(
+    (ref) => Future.delayed(const Duration(seconds: 3), () => '1234567890'));
+final mockGetIsPiOnlineProvider = FutureProvider(
+    (ref) => Future.delayed(const Duration(seconds: 3), () => true));
 
 class ConnectToPi extends HookConsumerWidget {
   const ConnectToPi({
@@ -12,8 +19,8 @@ class ConnectToPi extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uuid = ref.watch(getUuidProvider); // todo: save uuid to datastore
-    final isPiOnline = ref.watch(getIsPiOnlineProvider.future);
+    // final uuid = ref.watch(getUuidProvider);
+    final uuid = ref.watch(mockGetUuidProvider); // todo: save uuid to datastore
     return MyPageFrame(
       children: [
         Text('Connect to Evergreen',
@@ -21,30 +28,63 @@ class ConnectToPi extends HookConsumerWidget {
         const SizedBox(height: 20),
         uuid.when(
           data: (String data) {
-            // refactor to extracted widget
-            return ElevatedButton(
-              child: const Text('Continue'),
-              onPressed: () {
-                isPiOnline.then(
-                  (isOnline) {
-                    context
-                        .goNamed(isOnline ? 'authorize device' : 'enter wifi');
-                  },
-                );
-              },
-            );
+            return const _IsPiOnline();
           },
           error: (Object error, StackTrace? stackTrace) {
             return Text('Error: $error');
           },
           loading: () {
-            return const CircularProgressIndicator();
+            return JumpingText('getting device info..');
           },
         )
       ],
       bottomChildren: const [
         ElevatedButton(child: Text('Get Help'), onPressed: null),
       ],
+    );
+  }
+}
+
+class _IsPiOnline extends HookConsumerWidget {
+  const _IsPiOnline({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final isPiOnline = ref.watch(getIsPiOnlineProvider);
+    final isPiOnline = ref.watch(mockGetIsPiOnlineProvider);
+    return isPiOnline.when(
+      data: (isOnline) {
+        return _Continue(
+          isOnline: isOnline,
+        );
+      },
+      error: (Object error, StackTrace? stackTrace) {
+        return Text('Error: $error');
+      },
+      loading: () {
+        return JumpingText('is device registered?..');
+      },
+    );
+  }
+}
+
+class _Continue extends HookConsumerWidget {
+  const _Continue({
+    Key? key,
+    required this.isOnline,
+  }) : super(key: key);
+
+  final bool isOnline;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ElevatedButton(
+      child: const Text('Continue'),
+      onPressed: () {
+        context.goNamed(isOnline ? 'authorize device' : 'enter wifi');
+      },
     );
   }
 }
