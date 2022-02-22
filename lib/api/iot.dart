@@ -34,7 +34,7 @@ final getGreengrassProvider = FutureProvider((ref) async {
   final greengrass = Greengrass(
     region: 'us-west-2',
     credentials: clientCredentials,
-    endpointUrl: _awsIotEndpoint,
+    endpointUrl: _awsDataPlaneEndpoint,
   );
   debugPrint('iot: $greengrass');
   return greengrass;
