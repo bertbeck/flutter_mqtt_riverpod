@@ -83,7 +83,7 @@ final getIotPolicyProvider = FutureProvider((ref) async {
 final setIotPolicyProvider = FutureProvider((ref) async {
   final iot = await ref.watch(getIotProvider.future);
   final uuid = await ref.watch(getUuidProvider.future);
-  final createPolicy = await iot.createPolicy(policyDocument: '''
+  await iot.createPolicy(policyDocument: '''
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -102,7 +102,7 @@ final setIotPolicyProvider = FutureProvider((ref) async {
 
 ''', policyName: uuid);
 
-  return createPolicy;
+  return true;
 });
 
 final setAttachIotPolicyProvider = FutureProvider((ref) async {
@@ -188,3 +188,8 @@ final getSsidProvider = FutureProvider((ref) async {
   debugPrint('ssid: $ssid');
   return ssid;
 });
+
+final setIotInstallSoftwareProvider = FutureProvider((ref) => Future.delayed(
+      const Duration(seconds: 3),
+      () => true, // todo: implement
+    ));

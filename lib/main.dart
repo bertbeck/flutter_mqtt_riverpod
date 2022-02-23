@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'amplifyconfiguration.dart';
 import 'api/http_api.dart';
+import 'api/iot.dart';
 import 'screens/auth.dart';
 
 Future<void> main() async {
@@ -18,20 +19,29 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       overrides: [
-        getWifiListProvider.overrideWithValue(
-          const AsyncValue.data(
-            ['a', 'b', 'c'],
+        getWifiListProvider.overrideWithProvider(
+          FutureProvider(
+            (ref) => Future.delayed(
+                const Duration(seconds: 3), () => ['a', 'b', 'c']),
           ),
         ),
-        setWifiOnPiProvider.overrideWithValue(
-          const AsyncValue.data(true),
+        setWifiOnPiProvider.overrideWithProvider(
+          FutureProvider(
+            (ref) => Future.delayed(const Duration(seconds: 3), () => true),
+          ),
         ),
-        getUuidProvider.overrideWithValue(
-          const AsyncValue.data('RandalPi'),
+        getUuidProvider.overrideWithProvider(
+          FutureProvider(
+            (ref) =>
+                Future.delayed(const Duration(seconds: 3), () => 'RandalPi'),
+          ),
         ),
-        getIsPiOnlineProvider.overrideWithValue(
-          const AsyncValue.data(false),
+        setIotPolicyProvider.overrideWithProvider(
+          FutureProvider(
+              (ref) => Future.delayed(const Duration(seconds: 3), () => true)),
         ),
+        getIsPiOnlineProvider.overrideWithProvider(FutureProvider(
+            (ref) => Future.delayed(const Duration(seconds: 3), () => true))),
       ],
       child: const Auth(),
     ),

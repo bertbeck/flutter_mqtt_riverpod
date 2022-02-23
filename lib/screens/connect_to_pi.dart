@@ -7,11 +7,6 @@ import 'package:progress_indicators/progress_indicators.dart';
 import '../api/http_api.dart';
 import '../shared/my_page_frame.dart';
 
-final mockGetUuidProvider = FutureProvider(
-    (ref) => Future.delayed(const Duration(seconds: 3), () => '1234567890'));
-final mockGetIsPiOnlineProvider = FutureProvider(
-    (ref) => Future.delayed(const Duration(seconds: 3), () => true));
-
 class ConnectToPi extends HookConsumerWidget {
   const ConnectToPi({
     Key? key,
@@ -19,8 +14,7 @@ class ConnectToPi extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final uuid = ref.watch(getUuidProvider);
-    final uuid = ref.watch(mockGetUuidProvider); // todo: save uuid to datastore
+    final uuid = ref.watch(getUuidProvider);
     return MyPageFrame(
       children: [
         Text('Connect to Evergreen',
@@ -52,8 +46,7 @@ class _IsPiOnline extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final isPiOnline = ref.watch(getIsPiOnlineProvider);
-    final isPiOnline = ref.watch(mockGetIsPiOnlineProvider);
+    final isPiOnline = ref.watch(getIsPiOnlineProvider);
     return isPiOnline.when(
       data: (isOnline) {
         return _Continue(

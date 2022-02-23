@@ -6,17 +6,6 @@ import 'package:progress_indicators/progress_indicators.dart';
 import '../api/iot.dart';
 import '../shared/my_page_frame.dart';
 
-final mockCreatePolicyProvider =
-    FutureProvider((ref) => Future.delayed(const Duration(seconds: 3)));
-final mockAttachPolicyProvider =
-    FutureProvider((ref) => Future.delayed(const Duration(seconds: 3)));
-final mockWaitForPiToRegisterProvider =
-    FutureProvider((ref) => Future.delayed(const Duration(seconds: 3)));
-final mockAuthorizingPiProvider =
-    FutureProvider((ref) => Future.delayed(const Duration(seconds: 3)));
-final mockInstallingSoftwareProvider =
-    FutureProvider((ref) => Future.delayed(const Duration(seconds: 3)));
-
 class AuthorizeDevice extends HookConsumerWidget {
   const AuthorizeDevice({
     Key? key,
@@ -46,8 +35,7 @@ class _CreatePolicy extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final createPolicy = ref.watch(setIotPolicyProvider);
-    final createPolicy = ref.watch(mockCreatePolicyProvider);
+    final createPolicy = ref.watch(setIotPolicyProvider);
     return createPolicy.when(
       data: (data) => const _AttachPolicy(),
       loading: () => JumpingText('creating aws policy..'),
@@ -111,7 +99,7 @@ class _InstallingSoftware extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final installingSoftware = ref.watch(mockInstallingSoftwareProvider);
+    final installingSoftware = ref.watch(setIotInstallSoftwareProvider);
     return installingSoftware.when(
       data: (data) => const _Continue(),
       loading: () => JumpingText('installing software..'),
