@@ -79,7 +79,7 @@ class _WaitForPiRegistration extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final waitForPiToRegister = ref.watch(getConnectivityProvider);
+    final waitForPiToRegister = ref.watch(getDescribeThingProvider);
     return waitForPiToRegister.when(
       data: (data) => const _AuthorizingPi(),
       loading: () => JumpingText('waiting for device to register..'),
@@ -95,7 +95,7 @@ class _AuthorizingPi extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authorizingPi = ref.watch(mockAuthorizingPiProvider);
+    final authorizingPi = ref.watch(changeGroupForThingProvider);
     return authorizingPi.when(
       data: (data) => const _InstallingSoftware(),
       loading: () => JumpingText('authorizing device..'),

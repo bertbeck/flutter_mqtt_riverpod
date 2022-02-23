@@ -13,7 +13,7 @@ const String _awsIotEndpoint = 'https://iot.us-west-2.amazonaws.com';
 const String _awsDataPlaneEndpoint =
     "https://a2fa43d73ede4i-ats.iot.us-west-2.amazonaws.com";
 const String _awsGreengrassDiscoveryEndpoint =
-    "https://greengrass-ats.iot.us-west-2.amazonaws.com	";
+    "https://greengrass-ats.iot.us-west-2.amazonaws.com";
 
 final getAuthSessionProvider =
     FutureProvider((ref) async => await Amplify.Auth.fetchAuthSession(
@@ -49,6 +49,15 @@ final getConnectivityProvider = FutureProvider((ref) async {
 
   // debugPrint('getPolicy: $getPolicy');
   return getConnectivity;
+});
+
+final getListEvergreenGroupsProvider = FutureProvider((ref) async {
+  final greengrass = await ref.watch(getGreengrassProvider.future);
+  // final uuid = await ref.watch(getUuidProvider.future);
+  final greengrassGroups = await greengrass.listGroups();
+
+  // debugPrint('getPolicy: $getPolicy');
+  return greengrassGroups;
 });
 
 final getIotEndpointProvider = FutureProvider((ref) async {
@@ -95,6 +104,7 @@ final setIotPolicyProvider = FutureProvider((ref) async {
 
   return createPolicy;
 });
+
 final setAttachIotPolicyProvider = FutureProvider((ref) async {
   final iot = await ref.watch(getIotProvider.future);
   final uuid = await ref.watch(getUuidProvider.future);
@@ -103,6 +113,25 @@ final setAttachIotPolicyProvider = FutureProvider((ref) async {
   final attachPolicy = await iot.attachPolicy(target: id, policyName: uuid);
 
   return attachPolicy;
+});
+
+final getDescribeThingProvider = FutureProvider((ref) async {
+  final iot = await ref.watch(getIotProvider.future);
+  final uuid = await ref.watch(getUuidProvider.future);
+  final result = await iot.describeThing(thingName: uuid);
+
+  return result;
+});
+
+final changeGroupForThingProvider = FutureProvider((ref) async {
+  final iot = await ref.watch(getIotProvider.future);
+  final uuid = await ref.watch(getUuidProvider.future);
+  final addThingToThingGroup = await iot.addThingToThingGroup(
+      thingName: uuid, thingGroupName: 'authorized');
+  await iot.removeThingFromThingGroup(
+      thingName: uuid, thingGroupName: 'GreengrassQuickStartGroup');
+
+  return addThingToThingGroup;
 });
 
 final iotDataPlaneProvider = FutureProvider((ref) async {
