@@ -19,29 +19,29 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       overrides: [
-        getWifiListProvider.overrideWithProvider(
-          FutureProvider(
-            (ref) => Future.delayed(
-                const Duration(seconds: 3), () => ['a', 'b', 'c']),
-          ),
-        ),
-        setWifiOnPiProvider.overrideWithProvider(
-          FutureProvider(
-            (ref) => Future.delayed(const Duration(seconds: 3), () => true),
-          ),
-        ),
-        getUuidProvider.overrideWithProvider(
-          FutureProvider(
-            (ref) =>
-                Future.delayed(const Duration(seconds: 3), () => 'RandalPi'),
-          ),
-        ),
-        setIotPolicyProvider.overrideWithProvider(
-          FutureProvider(
-              (ref) => Future.delayed(const Duration(seconds: 3), () => true)),
-        ),
-        getIsPiOnlineProvider.overrideWithProvider(FutureProvider(
-            (ref) => Future.delayed(const Duration(seconds: 3), () => true))),
+        // getWifiListProvider.overrideWithProvider(
+        //   FutureProvider(
+        //     (ref) => Future.delayed(
+        //         const Duration(seconds: 3), () => ['a', 'b', 'c']),
+        //   ),
+        // ),
+        // setWifiOnPiProvider.overrideWithProvider(
+        //   FutureProvider(
+        //     (ref) => Future.delayed(const Duration(seconds: 3), () => true),
+        //   ),
+        // ),
+        // getUuidProvider.overrideWithProvider(
+        //   FutureProvider(
+        //     (ref) =>
+        //         Future.delayed(const Duration(seconds: 3), () => 'RandalPi'),
+        //   ),
+        // ),
+        // setIotPolicyProvider.overrideWithProvider(
+        //   FutureProvider(
+        //       (ref) => Future.delayed(const Duration(seconds: 3), () => true)),
+        // ),
+        // getIsPiOnlineProvider.overrideWithProvider(FutureProvider(
+        //     (ref) => Future.delayed(const Duration(seconds: 3), () => true))),
       ],
       child: const Auth(),
     ),

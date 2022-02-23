@@ -22,7 +22,8 @@ class ConnectToPi extends HookConsumerWidget {
         const SizedBox(height: 20),
         uuid.when(
           data: (String data) {
-            return const _IsPiOnline();
+            debugPrint('uuid is $data');
+            return const _SetCredentials();
           },
           error: (Object error, StackTrace? stackTrace) {
             return Text('Error: $error');
@@ -35,6 +36,28 @@ class ConnectToPi extends HookConsumerWidget {
       bottomChildren: const [
         ElevatedButton(child: Text('Get Help'), onPressed: null),
       ],
+    );
+  }
+}
+
+class _SetCredentials extends HookConsumerWidget {
+  const _SetCredentials({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final setCredentials = ref.watch(setCredentialsOnPiProvider);
+    return setCredentials.when(
+      data: (dynamic data) {
+        return const _IsPiOnline();
+      },
+      error: (Object error, StackTrace? stackTrace) {
+        return Text('Error: $error');
+      },
+      loading: () {
+        return JumpingText('setting credentials..');
+      },
     );
   }
 }
@@ -57,7 +80,7 @@ class _IsPiOnline extends HookConsumerWidget {
         return Text('Error: $error');
       },
       loading: () {
-        return JumpingText('is device registered?..');
+        return JumpingText('is device online?..');
       },
     );
   }

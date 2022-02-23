@@ -108,6 +108,8 @@ class _InstallingSoftware extends HookConsumerWidget {
   }
 }
 
+//todo add wifi ip address
+
 class _Continue extends HookConsumerWidget {
   const _Continue({
     Key? key,

@@ -12,7 +12,7 @@ final uuidEndpoint = Uri.parse('http://10.42.0.1:5000/uuid/generate');
 final setCredentialsEndpoint =
     Uri.parse('http://10.42.0.1:5000/credentials/set');
 
-final getPiIsOnlineEndpoint = Uri.parse('http://10.42.0.1:5000/wifi/is_global');
+final getPiIsOnlineEndpoint = Uri.parse('http://10.42.0.1:5000/isOnline');
 // final endpoint = Uri.parse('http://10.0.0.20:5000/wifi/scan');
 // final endpoint2 = Uri.parse('http://10.0.0.20:5000/wifi/set');
 
@@ -59,8 +59,9 @@ final setWifiOnPiProvider = FutureProvider((ref) async {
       .replace(queryParameters: {'ssid': selectedWifi, 'password': password});
   final response =
       await client.get(endwithargs, headers: {'Accept': 'application/json'});
-  final decoded = jsonDecode(response.body);
-  return decoded;
+  // final decoded = jsonDecode(response.body);
+  // return decoded;
+  return true;
 });
 
 final setCredentialsOnPiProvider = FutureProvider((ref) async {
