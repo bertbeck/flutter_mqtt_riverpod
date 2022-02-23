@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'amplifyconfiguration.dart';
-import 'api/http_api.dart';
-import 'api/iot.dart';
 import 'screens/auth.dart';
 
 Future<void> main() async {
@@ -17,7 +15,7 @@ Future<void> main() async {
     throw Exception('Could not configure Amplify: $e');
   }
   runApp(
-    ProviderScope(
+    const ProviderScope(
       overrides: [
         // getWifiListProvider.overrideWithProvider(
         //   FutureProvider(
@@ -43,7 +41,7 @@ Future<void> main() async {
         // getIsPiOnlineProvider.overrideWithProvider(FutureProvider(
         //     (ref) => Future.delayed(const Duration(seconds: 3), () => true))),
       ],
-      child: const Auth(),
+      child: Auth(),
     ),
   );
 }

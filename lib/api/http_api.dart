@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 
-import '../screens/enter_wifi.dart';
 import 'iot.dart';
 
 final endpoint = Uri.parse('http://10.42.0.1:5000/wifi/scan');
@@ -52,13 +51,6 @@ final getWifiListProvider = FutureProvider<List<String>>((ref) async {
 });
 
 final setWifiOnPiProvider = FutureProvider((ref) async {
-  final client = ref.watch(httpClientProvider);
-  final selectedWifi = ref.watch(selectedWifiProvider);
-  final password = ref.watch(wifiPasswordProvider);
-  final endwithargs = endpoint2
-      .replace(queryParameters: {'ssid': selectedWifi, 'password': password});
-  final response =
-      await client.get(endwithargs, headers: {'Accept': 'application/json'});
   // final decoded = jsonDecode(response.body);
   // return decoded;
   return true;
@@ -72,13 +64,19 @@ final setCredentialsOnPiProvider = FutureProvider((ref) async {
   final secretKey = credentials.secretKey;
   final sessionToken = credentials.sessionToken;
 
-  final endwithargs = setCredentialsEndpoint.replace(queryParameters: {
+  // final endwithargs = setCredentialsEndpoint.replace(queryParameters: {
+  //   'accessKey': accessKey,
+  //   'secretKey': secretKey,
+  //   'sessionToken': sessionToken
+  // });
+
+  final sendBody = {
     'accessKey': accessKey,
     'secretKey': secretKey,
-    'sessionToken': sessionToken
-  });
-  final response =
-      await client.get(endwithargs, headers: {'Accept': 'application/json'});
+    'sessionToken': sessionToken,
+  };
+  final response = await client.post(setCredentialsEndpoint,
+      body: jsonEncode(sendBody), headers: {'Accept': 'application/json'});
   final decoded = jsonDecode(response.body);
   return decoded;
 });
