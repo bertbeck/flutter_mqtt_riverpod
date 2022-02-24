@@ -83,8 +83,6 @@ class SelectWiFi extends HookConsumerWidget {
                 selectedWifiState.state = dropdownState.value;
                 passwordState.state = passwordController.text;
 
-                // todo set wifi here
-
                 context.goNamed('authorize device');
               },
               child: const Text('Set WiFi!'),

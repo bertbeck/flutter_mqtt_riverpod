@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+import '../api/http_api.dart';
 import '../api/iot.dart';
 import '../shared/my_page_frame.dart';
 
@@ -19,7 +20,7 @@ class AuthorizeDevice extends HookConsumerWidget {
         const SizedBox(height: 20),
         const Text('Connecting Account Y to device X'),
         const SizedBox(height: 20),
-        const _CreatePolicy(),
+        const _SetWifi(),
       ],
       bottomChildren: const [
         ElevatedButton(child: Text('Get Help'), onPressed: null),
@@ -27,6 +28,24 @@ class AuthorizeDevice extends HookConsumerWidget {
     );
   }
 }
+
+class _SetWifi extends HookConsumerWidget {
+  const _SetWifi({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final set = ref.watch(setWifiOnPiProvider);
+    return set.when(
+      data: (data) => const _CreatePolicy(),
+      loading: () => JumpingText('changing device wifi..'),
+      error: (e, _) => Text('Error: $e'),
+    );
+  }
+}
+
+// mobile needs to change wifi here
 
 class _CreatePolicy extends HookConsumerWidget {
   const _CreatePolicy({

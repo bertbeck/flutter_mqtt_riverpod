@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 
+import '../screens/enter_wifi.dart';
 import 'iot.dart';
 
 final endpoint = Uri.parse('http://10.42.0.1:5000/wifi/scan');
@@ -51,8 +53,15 @@ final getWifiListProvider = FutureProvider<List<String>>((ref) async {
 });
 
 final setWifiOnPiProvider = FutureProvider((ref) async {
-  // final decoded = jsonDecode(response.body);
-  // return decoded;
+  final client = ref.watch(httpClientProvider);
+  final selectedWifi = ref.watch(selectedWifiProvider);
+  final password = ref.watch(wifiPasswordProvider);
+  final endwithargs = endpoint2
+      .replace(queryParameters: {'ssid': selectedWifi, 'password': password});
+  final response =
+      await client.get(endwithargs, headers: {'Accept': 'application/json'});
+  final decoded = jsonDecode(response.body);
+  debugPrint(decoded.toString());
   return true;
 });
 
