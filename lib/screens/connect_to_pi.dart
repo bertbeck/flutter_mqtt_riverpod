@@ -99,7 +99,7 @@ class _Continue extends HookConsumerWidget {
     return ElevatedButton(
       child: const Text('Continue'),
       onPressed: () {
-        context.goNamed(isOnline ? 'authorize device' : 'enter wifi');
+        context.pushNamed(isOnline ? 'authorize device' : 'enter wifi');
       },
     );
   }

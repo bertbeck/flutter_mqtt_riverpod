@@ -25,7 +25,7 @@ class AddYourDevice extends HookConsumerWidget {
       bottomChildren: [
         ElevatedButton(
             child: const Text('Yes'),
-            onPressed: () => context.goNamed('connect to pi')),
+            onPressed: () => context.pushNamed('connect to pi')),
         const ElevatedButton(child: Text('No'), onPressed: null),
       ], // todo: add a picture of the hotspot
     );

@@ -21,7 +21,7 @@ class WaitForBlue extends HookConsumerWidget {
         ElevatedButton(
             child: const Text('Continue'),
             onPressed: () {
-              context.goNamed('authorize device');
+              context.pushNamed('authorize device');
             }),
         const ElevatedButton(child: Text('Get Help'), onPressed: null),
       ],
