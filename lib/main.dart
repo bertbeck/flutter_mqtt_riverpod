@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'amplifyconfiguration.dart';
+import 'api/http_api.dart';
+import 'api/iot.dart';
 import 'screens/auth.dart';
 
 Future<void> main() async {
@@ -15,33 +17,38 @@ Future<void> main() async {
     throw Exception('Could not configure Amplify: $e');
   }
   runApp(
-    const ProviderScope(
+    ProviderScope(
       overrides: [
-        // getWifiListProvider.overrideWithProvider(
-        //   FutureProvider(
-        //     (ref) => Future.delayed(
-        //         const Duration(seconds: 3), () => ['a', 'b', 'c']),
-        //   ),
-        // ),
-        // setWifiOnPiProvider.overrideWithProvider(
-        //   FutureProvider(
-        //     (ref) => Future.delayed(const Duration(seconds: 3), () => true),
-        //   ),
-        // ),
-        // getUuidProvider.overrideWithProvider(
-        //   FutureProvider(
-        //     (ref) =>
-        //         Future.delayed(const Duration(seconds: 3), () => 'RandalPi'),
-        //   ),
-        // ),
-        // setIotPolicyProvider.overrideWithProvider(
-        //   FutureProvider(
-        //       (ref) => Future.delayed(const Duration(seconds: 3), () => true)),
-        // ),
-        // getIsPiOnlineProvider.overrideWithProvider(FutureProvider(
-        //     (ref) => Future.delayed(const Duration(seconds: 3), () => true))),
+        getWifiListProvider.overrideWithProvider(
+          FutureProvider(
+            (ref) => Future.delayed(
+                const Duration(seconds: 3), () => ['a', 'b', 'c']),
+          ),
+        ),
+        setCredentialsOnPiProvider.overrideWithProvider(
+          FutureProvider(
+            (ref) => Future.delayed(const Duration(seconds: 3), () => true),
+          ),
+        ),
+        setWifiOnPiProvider.overrideWithProvider(
+          FutureProvider(
+            (ref) => Future.delayed(const Duration(seconds: 3), () => true),
+          ),
+        ),
+        getUuidProvider.overrideWithProvider(
+          FutureProvider(
+            (ref) =>
+                Future.delayed(const Duration(seconds: 3), () => 'RandalPi'),
+          ),
+        ),
+        setIotPolicyProvider.overrideWithProvider(
+          FutureProvider(
+              (ref) => Future.delayed(const Duration(seconds: 3), () => true)),
+        ),
+        getIsPiOnlineProvider.overrideWithProvider(FutureProvider(
+            (ref) => Future.delayed(const Duration(seconds: 3), () => true))),
       ],
-      child: Auth(),
+      child: const Auth(),
     ),
   );
 }
