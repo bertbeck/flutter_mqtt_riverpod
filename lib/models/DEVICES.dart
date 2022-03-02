@@ -22,133 +22,135 @@
 import 'package:amplify_core/amplify_core.dart';
 import 'package:flutter/foundation.dart';
 
-
 /** This is an auto generated class representing the Devices type in your schema. */
 @immutable
 class Devices extends Model {
   static const classType = const _DevicesModelType();
   final String id;
-  final String? _uuid1;
+  final String? _ip;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
   @override
   getInstanceType() => classType;
-  
+
   @override
   String getId() {
     return id;
   }
-  
-  String? get uuid1 {
-    return _uuid1;
+
+  String? get ip {
+    return _ip;
   }
-  
+
   TemporalDateTime? get createdAt {
     return _createdAt;
   }
-  
+
   TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
-  
-  const Devices._internal({required this.id, uuid1, createdAt, updatedAt}): _uuid1 = uuid1, _createdAt = createdAt, _updatedAt = updatedAt;
-  
-  factory Devices({String? id, String? uuid1}) {
-    return Devices._internal(
-      id: id == null ? UUID.getUUID() : id,
-      uuid1: uuid1);
+
+  const Devices._internal({required this.id, ip, createdAt, updatedAt})
+      : _ip = ip,
+        _createdAt = createdAt,
+        _updatedAt = updatedAt;
+
+  factory Devices({String? id, String? ip}) {
+    return Devices._internal(id: id == null ? UUID.getUUID() : id, ip: ip);
   }
-  
+
   bool equals(Object other) {
     return this == other;
   }
-  
+
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Devices &&
-      id == other.id &&
-      _uuid1 == other._uuid1;
+    return other is Devices && id == other.id && _ip == other._ip;
   }
-  
+
   @override
   int get hashCode => toString().hashCode;
-  
+
   @override
   String toString() {
     var buffer = new StringBuffer();
-    
+
     buffer.write("Devices {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("uuid1=" + "$_uuid1" + ", ");
-    buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
-    buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
+    buffer.write("ip=" + "$_ip" + ", ");
+    buffer.write("createdAt=" +
+        (_createdAt != null ? _createdAt!.format() : "null") +
+        ", ");
+    buffer.write(
+        "updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
-    
+
     return buffer.toString();
   }
-  
-  Devices copyWith({String? id, String? uuid1}) {
-    return Devices._internal(
-      id: id ?? this.id,
-      uuid1: uuid1 ?? this.uuid1);
+
+  Devices copyWith({String? id, String? ip}) {
+    return Devices._internal(id: id ?? this.id, ip: ip ?? this.ip);
   }
-  
-  Devices.fromJson(Map<String, dynamic> json)  
-    : id = json['id'],
-      _uuid1 = json['uuid1'],
-      _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
-  
+
+  Devices.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        _ip = json['ip'],
+        _createdAt = json['createdAt'] != null
+            ? TemporalDateTime.fromString(json['createdAt'])
+            : null,
+        _updatedAt = json['updatedAt'] != null
+            ? TemporalDateTime.fromString(json['updatedAt'])
+            : null;
+
   Map<String, dynamic> toJson() => {
-    'id': id, 'uuid1': _uuid1, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
-  };
+        'id': id,
+        'ip': _ip,
+        'createdAt': _createdAt?.format(),
+        'updatedAt': _updatedAt?.format()
+      };
 
   static final QueryField ID = QueryField(fieldName: "devices.id");
-  static final QueryField UUID1 = QueryField(fieldName: "uuid1");
-  static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
+  static final QueryField IP = QueryField(fieldName: "ip");
+  static var schema =
+      Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Devices";
     modelSchemaDefinition.pluralName = "Devices";
-    
+
     modelSchemaDefinition.authRules = [
-      AuthRule(
-        authStrategy: AuthStrategy.PUBLIC,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
-        ])
+      AuthRule(authStrategy: AuthStrategy.PUBLIC, operations: [
+        ModelOperation.CREATE,
+        ModelOperation.UPDATE,
+        ModelOperation.DELETE,
+        ModelOperation.READ
+      ])
     ];
-    
+
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
-    
+
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Devices.UUID1,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
+        key: Devices.IP,
+        isRequired: false,
+        ofType: ModelFieldType(ModelFieldTypeEnum.string)));
+
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
-      fieldName: 'createdAt',
-      isRequired: false,
-      isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
-    ));
-    
+        fieldName: 'createdAt',
+        isRequired: false,
+        isReadOnly: true,
+        ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)));
+
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
-      fieldName: 'updatedAt',
-      isRequired: false,
-      isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
-    ));
+        fieldName: 'updatedAt',
+        isRequired: false,
+        isReadOnly: true,
+        ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)));
   });
 }
 
 class _DevicesModelType extends ModelType<Devices> {
   const _DevicesModelType();
-  
+
   @override
   Devices fromJson(Map<String, dynamic> jsonData) {
     return Devices.fromJson(jsonData);

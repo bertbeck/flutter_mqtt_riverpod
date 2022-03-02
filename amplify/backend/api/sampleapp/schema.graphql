@@ -1,5 +1,5 @@
 type Devices @model @auth(rules: [{allow: public}]) {
   id: ID!
-  uuid1: String
+  ip: String
 }
-  
+ 

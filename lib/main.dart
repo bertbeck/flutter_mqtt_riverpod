@@ -24,6 +24,10 @@ Future<void> main() async {
   } on Exception catch (e) {
     throw Exception('Could not configure Amplify: $e');
   }
+  final device = Devices(id: 'foo');
+  final request = ModelMutations.create(device);
+  final response = await Amplify.API.mutate(request: request).response;
+
   runApp(
     const ProviderScope(
       // overrides: [
