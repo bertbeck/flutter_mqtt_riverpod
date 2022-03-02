@@ -11,13 +11,12 @@ class GetIPAddress extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final devices = ref.watch(ipProvider);
-    debugPrint('$devices');
-    debugPrint('hello');
+    final ip = ref.watch(ipProvider).value;
 
-    return MyPageFrame(children: [
-      const SizedBox(height: 20),
-      Text('devices $devices'),
-    ], bottomChildren: const []);
+    debugPrint('$ip');
+
+    return MyPageFrame(children: <Widget>[
+      Text('$ip'),
+    ]);
   }
 }
