@@ -19,7 +19,7 @@ Future<void> main() async {
     AmplifyDataStore datastorePlugin =
         AmplifyDataStore(modelProvider: ModelProvider.instance);
     Amplify.addPlugin(datastorePlugin);
-    await Amplify.addPlugin(AmplifyAPI());
+    await Amplify.addPlugin(AmplifyAPI(modelProvider: ModelProvider.instance));
     await Amplify.configure(amplifyconfig);
   } on Exception catch (e) {
     throw Exception('Could not configure Amplify: $e');
