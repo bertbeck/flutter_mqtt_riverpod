@@ -9,14 +9,16 @@ import 'authorize_device.dart';
 import 'connect_to_pi.dart';
 import 'dashboard.dart';
 import 'enter_wifi.dart';
+import 'get_ip_address.dart';
 import 'link_device_to_account.dart';
 import 'sign_in_to_wallet.dart';
 import 'wait_for_blue.dart';
 
 final _router = GoRouter(
   debugLogDiagnostics: true,
-  initialLocation: '/addYourDevice',
+  // initialLocation: '/addYourDevice',
   // initialLocation: '/Dashboard',
+  initialLocation: '/getIp',
   routes: [
     GoRoute(
       path: '/addYourDevice',
@@ -29,7 +31,7 @@ final _router = GoRouter(
       builder: (context, state) => const ConnectToPi(),
     ),
     GoRoute(
-      path: '/enterWifi',
+      path: '/EnterWifi',
       name: 'enter wifi',
       builder: (context, state) => const EnterWifi(),
     ),
@@ -61,6 +63,10 @@ final _router = GoRouter(
         path: '/Dashboard',
         name: 'dashboard',
         builder: (context, state) => const Dashboard()),
+    GoRoute(
+        path: '/GetIP',
+        name: 'get ip',
+        builder: (context, state) => const GetIPAddress()),
   ],
 );
 

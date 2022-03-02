@@ -57,18 +57,10 @@ class Dashboard extends HookConsumerWidget {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              // Positioned(
-              //     left: 0,
-              //     top: 0,
-              //     child: Transform.rotate(
-              //         angle: 0.5,
-              //         child: Container(
-              //             color: Colors.green, width: 400, height: 300))),
               FractionallySizedBox(
                 widthFactor: 0.95,
                 heightFactor: 0.95,
                 child: Container(
-                  // color: Colors.red,
                   color: const Color(0xFFEBEBEB),
                   alignment: Alignment.center,
                   padding: const EdgeInsets.all(16),
@@ -77,7 +69,6 @@ class Dashboard extends HookConsumerWidget {
                       SliverList(
                         delegate: SliverChildListDelegate(
                           [
-                            // const SizedBox(height: 96),
                             Card(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
